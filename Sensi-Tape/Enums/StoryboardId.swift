@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StoryboardIds : String {
+enum StoryboardId : String {
     case logInViewController = "LoginViewController"
     case mainTabBarController = "MainTabBarController"
 }

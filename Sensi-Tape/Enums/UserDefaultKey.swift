@@ -9,4 +9,6 @@ import Foundation
 
 enum UserDefaultKey: String {
     case userId = "userId"
+    case compressionValue = "compressionValue"
+    case temperatureValue = "temperatureValue"
 }

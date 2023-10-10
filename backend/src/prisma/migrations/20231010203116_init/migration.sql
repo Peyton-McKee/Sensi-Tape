@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Tag" AS ENUM ('RELAXATION', 'FLEXIBILITY', 'DISCOMFORT_RESOLUTION', 'STRENGTH', 'PAIN_RELIEF', 'MOBILITY', 'STABILITY', 'BALANCE', 'POSTURE');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -22,6 +25,16 @@ CREATE TABLE "Data" (
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "Data_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Exercise" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "tags" "Tag"[],
+    "link" TEXT NOT NULL,
+
+    CONSTRAINT "Exercise_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

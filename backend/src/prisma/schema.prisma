@@ -30,3 +30,22 @@ model Data {
   userId       String
   user         User     @relation(fields: [userId], references: [id])
 }
+
+enum Tag {
+  RELAXATION
+  FLEXIBILITY
+  DISCOMFORT_RESOLUTION
+  STRENGTH
+  PAIN_RELIEF
+  MOBILITY
+  STABILITY
+  BALANCE
+  POSTURE
+}
+
+model Exercise {
+  id   String @id @default(uuid())
+  name String
+  tags Tag[]
+  link String
+}

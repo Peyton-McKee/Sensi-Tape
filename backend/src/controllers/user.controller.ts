@@ -8,9 +8,7 @@ export default class UserController {
 
       res.status(200).json(allUsers);
     } catch (error) {
-      if (error instanceof Error) {
-        next(error);
-      }
+      next(error);
     }
   }
 
@@ -20,9 +18,7 @@ export default class UserController {
       const user = await UserService.getSingleUser(userId);
       res.status(200).json(user);
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        next(error);
-      }
+      next(error);
     }
   }
 }

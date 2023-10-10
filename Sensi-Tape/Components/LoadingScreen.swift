@@ -14,7 +14,7 @@ class LoadingScreen: UIView {
     override init(frame: CGRect) {
         self.activityMonitor = UIActivityIndicatorView(frame: frame)
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .black
         self.addSubview(self.activityMonitor)
     }
     

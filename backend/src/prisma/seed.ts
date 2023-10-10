@@ -1,6 +1,6 @@
 import prisma from './prisma';
 
-const performSeed: () => Promise<void> = async () => {
+const performSeed = async () => {
   await prisma.user.create({
     data: {
       firstName: 'Joe',

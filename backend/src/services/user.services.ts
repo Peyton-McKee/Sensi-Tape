@@ -1,5 +1,6 @@
 import { Data, User } from '@prisma/client';
 import prisma from '../prisma/prisma';
+import { HttpException } from '../utils/error.utils';
 
 export default class UserService {
   /**
@@ -26,7 +27,10 @@ export default class UserService {
     });
 
     if (!user) {
-      throw new Error(`User with id ${userId} not found!`);
+      throw new HttpException(
+        404,
+        `User with id ${userId} not found! (Please Logout and Login again to resolve this issue)`
+      );
     }
 
     return user;

@@ -21,15 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // if user has selected a map
-        if UserDefaults.standard.string(forKey: "userId") != nil {
-                // instantiate the main tab bar controller and set it as root view controller
-                // using the storyboard identifier we set earlier
-            let mainTabBarController = storyboard.instantiateViewController(identifier: StoryboardIds.mainTabBarController.rawValue)
-                window?.rootViewController = mainTabBarController
-            } else {
-                let loginController = storyboard.instantiateViewController(identifier: StoryboardIds.logInViewController.rawValue)
-                window?.rootViewController = loginController
-            }
+        if UserDefaults.standard.string(forKey: UserDefaultKey.userId.rawValue) != nil {
+            // instantiate the main tab bar controller and set it as root view controller
+            // using the storyboard identifier we set earlier
+            let mainTabBarController = storyboard.instantiateViewController(identifier: StoryboardId.mainTabBarController.rawValue)
+            window?.rootViewController = mainTabBarController
+        } else {
+            let loginController = storyboard.instantiateViewController(identifier: StoryboardId.logInViewController.rawValue)
+            window?.rootViewController = loginController
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -9,7 +9,7 @@ import Foundation
 
 enum Route {
     static func allUsers () -> String {
-        return APIHandler.baseURL + "/users"
+        return APIHandler.shared.baseURL + "/users"
     }
 
     static func userById (userId: String) -> String {
@@ -17,6 +17,6 @@ enum Route {
     }
     
     static func allExercises () -> String {
-        return APIHandler.baseURL + "/exercises"
+        return APIHandler.shared.baseURL + "/exercises"
     }
 }

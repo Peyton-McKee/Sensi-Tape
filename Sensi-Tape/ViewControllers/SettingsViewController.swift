@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.userId.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.compressionValue.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.temperatureValue.rawValue)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: StoryboardId.storyboardId.rawValue, bundle: nil)
         let logInViewController = storyboard.instantiateViewController(identifier: StoryboardId.logInViewController.rawValue)
         // This is to get the SceneDelegate object from your view controller
         // then call the change root view controller function to change to main tab bar

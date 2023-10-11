@@ -8,6 +8,9 @@
 import Foundation
 
 enum StoryboardId : String {
+    case storyboardId = "Main"
     case logInViewController = "LoginViewController"
-    case mainTabBarController = "MainTabBarController"
+    case mainNavigationController = "MainNavigationController"
+    case actitvityViewController = "ActivityViewController"
+    case graphSegue = "GraphSegue"
 }

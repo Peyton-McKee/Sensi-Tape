@@ -8,14 +8,15 @@
 import Foundation
 
 class APIHandler {
-    static let baseURL = "http://localhost:8080"
+    static let shared = APIHandler()
+    let baseURL = "http://localhost:8080"
     
     /**
      * Generic Query Function for Retrieving data from the backend
      * @param urlEndpoint The route endpoint to ping for data
      * @param completion The completion handler to call when the data is retrieved
      */
-    static func queryData <T : Codable>(route: String, completion: @escaping (Result<T, Error>) -> Void) {
+     public func queryData <T : Codable>(route: String, completion: @escaping (Result<T, Error>) -> Void) {
         let request = URL(string: route)!
         URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in

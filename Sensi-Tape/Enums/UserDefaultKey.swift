@@ -11,4 +11,5 @@ enum UserDefaultKey: String {
     case userId = "userId"
     case compressionValue = "compressionValue"
     case temperatureValue = "temperatureValue"
+    case selectedFoot = "selectedFoot"
 }

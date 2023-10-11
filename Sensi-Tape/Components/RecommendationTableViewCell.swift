@@ -8,7 +8,7 @@
 import UIKit
 
 class RecommendationTableViewCell: UITableViewCell {
-    lazy var label : UILabel = {
+    private lazy var label : UILabel = {
         let label = UILabel(frame: CGRect(x: 10, y: 10, width: self.frame.width - 80, height: 30))
         label.textColor = .white
         return label
@@ -22,8 +22,12 @@ class RecommendationTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.addSubview(self.label)
-        self.backgroundColor = .tertiarySystemFill
+        self.backgroundColor = .clear
         // Configure the view for the selected state
+    }
+    
+    public func setLabelText (_ text: String?) {
+        self.label.text = text
     }
     
 }

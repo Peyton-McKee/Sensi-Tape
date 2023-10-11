@@ -25,7 +25,7 @@ class LoginViewController: UIViewController, ErrorHandler {
     }
     
     func assignAllUsers () -> Void {
-        APIHandler.queryData(route: Route.allUsers(), completion: { result in
+        APIHandler.shared.queryData(route: Route.allUsers(), completion: { result in
             do {
                 self.allUsers = try result.get()
                 self.selectedUser = self.allUsers.first
@@ -49,11 +49,11 @@ class LoginViewController: UIViewController, ErrorHandler {
             return
         }
         UserDefaults.standard.setValue(selectedUser.id, forKey: UserDefaultKey.userId.rawValue)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: StoryboardId.mainTabBarController.rawValue)
+        let storyboard = UIStoryboard(name: StoryboardId.storyboardId.rawValue, bundle: nil)
+        let mainNavigationController = storyboard.instantiateViewController(identifier: StoryboardId.mainNavigationController.rawValue)
         // This is to get the SceneDelegate object from your view controller
         // then call the change root view controller function to change to main tab bar
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
         
     }
     
@@ -87,6 +87,9 @@ extension LoginViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard allUsers.count > 0 else {
+            return
+        }
         self.selectedUser = allUsers[row]
     }
 }

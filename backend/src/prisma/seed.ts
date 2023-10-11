@@ -1,6 +1,6 @@
 import prisma from './prisma';
 
-const performSeed: () => Promise<void> = async () => {
+const performSeed = async () => {
   await prisma.user.create({
     data: {
       firstName: 'Joe',
@@ -14,6 +14,29 @@ const performSeed: () => Promise<void> = async () => {
       firstName: 'Mark',
       lastName: 'Fontenot',
       email: 'cookie.eater@gmail.com'
+    }
+  });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Stretch Ankle',
+      tags: ['FLEXIBILITY', 'MOBILITY', 'STABILITY'],
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    }
+  });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Complain to the neighbors',
+      tags: ['DISCOMFORT_RESOLUTION', 'PAIN_RELIEF', 'STRENGTH'],
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    }
+  });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Joe Mama',
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
     }
   });
 };

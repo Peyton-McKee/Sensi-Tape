@@ -20,10 +20,14 @@ struct User : Codable {
     }
 }
 
-/**
- * Swift Doesnt have inheritance for structs, so using composition
- */
+
 struct AuthenticatedUser: Codable {
-    var user: User
+    var id: String
+    var firstName: String
+    var lastName: String
+    var email: String
+    var fullName: String {
+        return "\(firstName) \(lastName)"
+    }
     var data : [Data]
 }

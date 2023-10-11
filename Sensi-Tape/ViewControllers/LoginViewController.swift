@@ -25,7 +25,7 @@ class LoginViewController: UIViewController, ErrorHandler {
     }
     
     func assignAllUsers () -> Void {
-        APIHandler.getAllUsers(completion: { result in
+        APIHandler.queryData(route: Route.allUsers(), completion: { result in
             do {
                 self.allUsers = try result.get()
                 self.selectedUser = self.allUsers.first
@@ -48,9 +48,9 @@ class LoginViewController: UIViewController, ErrorHandler {
             self.handle(error: UserError.noUserSelectedError)
             return
         }
-        UserDefaults.standard.set(selectedUser.id, forKey: UserDefaultKey.userId.rawValue)
+        UserDefaults.standard.setValue(selectedUser.id, forKey: UserDefaultKey.userId.rawValue)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: StoryboardIds.mainTabBarController.rawValue)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: StoryboardId.mainTabBarController.rawValue)
         // This is to get the SceneDelegate object from your view controller
         // then call the change root view controller function to change to main tab bar
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)

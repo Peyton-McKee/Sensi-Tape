@@ -9,6 +9,7 @@ import Foundation
 
 enum UserError : Error {
     case noUserSelectedError
+    case notSignedInError
 }
 
 extension UserError : LocalizedError {
@@ -16,6 +17,8 @@ extension UserError : LocalizedError {
         switch self {
         case .noUserSelectedError:
             return "No User Selected, Must Select a User!"
+        case .notSignedInError:
+            return "You are not signed in please logout and sign back in!"
         }
     }
 }

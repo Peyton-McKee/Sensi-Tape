@@ -18,8 +18,10 @@ class SettingsViewController: UIViewController {
 
     @IBAction func logout(sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.userId.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.compressionValue.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.temperatureValue.rawValue)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let logInViewController = storyboard.instantiateViewController(identifier: StoryboardIds.logInViewController.rawValue)
+        let logInViewController = storyboard.instantiateViewController(identifier: StoryboardId.logInViewController.rawValue)
         // This is to get the SceneDelegate object from your view controller
         // then call the change root view controller function to change to main tab bar
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(logInViewController)

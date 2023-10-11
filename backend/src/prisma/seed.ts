@@ -16,6 +16,29 @@ const performSeed = async () => {
       email: 'cookie.eater@gmail.com'
     }
   });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Stretch Ankle',
+      tags: ['FLEXIBILITY', 'MOBILITY', 'STABILITY'],
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    }
+  });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Complain to the neighbors',
+      tags: ['DISCOMFORT_RESOLUTION', 'PAIN_RELIEF', 'STRENGTH'],
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    }
+  });
+
+  await prisma.exercise.create({
+    data: {
+      name: 'Joe Mama',
+      link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    }
+  });
 };
 
 performSeed()

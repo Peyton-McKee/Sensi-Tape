@@ -13,34 +13,43 @@ class LineGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        print("test")
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        
-        let linePath = UIBezierPath()
-        
-        let xSpacing = rect.width / CGFloat(dataPoints.count - 1)
-        
-        for (index, dataPoint) in dataPoints.enumerated() {
-            let x = CGFloat(index) * xSpacing
-            let y = (1.0 - dataPoint) * rect.height
-            let point = CGPoint(x: x, y: y)
-            
-            if index == 0 {
-                linePath.move(to: point)
-            } else {
-                linePath.addLine(to: point)
-            }
+        guard dataPoints.count > 1 else {
+            return
         }
         
-        UIColor.blue.setStroke() // Set line color
+        let path = UIBezierPath()
+        let lineWidth: CGFloat = 2.0
+        let lineColor = UIColor.blue
+        lineColor.setStroke()
+        path.lineWidth = lineWidth
         
-        context.setLineWidth(2.0)
-        context.addPath(linePath.cgPath)
-        context.strokePath()
+        // Calculate the x and y scales
+        let xScale = rect.width / CGFloat(dataPoints.count - 1)
+        let yScale = rect.height / (dataPoints.max()! - dataPoints.min()!)
+        
+        // Start the path at the first data point
+        path.move(to: CGPoint(x: 0, y: rect.height - (dataPoints[0] - dataPoints.min()!) * yScale))
+        
+        // Add line segments for the rest of the data points
+        for (index, dataPoint) in dataPoints.enumerated() {
+            let x = CGFloat(index) * xScale
+            let y = rect.height - (dataPoint - dataPoints.min()!) * yScale
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
+        
+        // Stroke the path
+        path.stroke()
     }
     
     func setAndRefreshData(dataPoints: [CGFloat]) {
         self.dataPoints = dataPoints
         self.setNeedsDisplay()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.cornerRadius = 15.0
+        self.clipsToBounds = true
     }
 }

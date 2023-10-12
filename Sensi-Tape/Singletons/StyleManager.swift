@@ -10,6 +10,7 @@ import UIKit
 
 final class StyleManager {
     static let shared = StyleManager()
+    private let graphColors : [UIColor] = [.blue, .green, .red, .white]
     
     public func styleViews (_ views: [UIView]) {
         for view: UIView in views {
@@ -21,5 +22,9 @@ final class StyleManager {
     
     public func styleTableView (_ tableView: UITableView) {
         tableView.backgroundColor = .quaternarySystemFill
+    }
+    
+    public func getGraphColor (_ index: Int) -> UIColor {
+        return graphColors[index]
     }
 }

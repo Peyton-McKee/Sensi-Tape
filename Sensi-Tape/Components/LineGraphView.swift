@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class LineGraphView: UIView {
-    var dataPoints: [[CGFloat]] = [] // 2D array of data points
+    private var dataPoints: [[CGFloat]] = [] // 2D array of data points
+    private var title: String = "Activity"
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -19,14 +20,14 @@ class LineGraphView: UIView {
         let yScale = rect.height / (self.dataPoints.flatMap { $0 }.max() ?? 1 - (self.dataPoints.flatMap { $0 }.min() ?? 1))
         
         // Loop through each array in the 2D dataPointsArray and draw lines
-        for dataPoints in dataPoints {
+        for (index, dataPoints) in dataPoints.enumerated() {
             guard dataPoints.count > 1 else {
                 continue
             }
             
             let path = UIBezierPath()
             let lineWidth: CGFloat = 2.0
-            let lineColor = UIColor.blue
+            let lineColor = StyleManager.shared.getGraphColor(index)
             lineColor.setStroke()
             path.lineWidth = lineWidth
             
@@ -43,11 +44,23 @@ class LineGraphView: UIView {
             // Stroke the path
             path.stroke()
         }
+        
+        // Draw the title in the top left corner
+        let titleRect = CGRect(x: 10, y: 10, width: 100, height: 30) // Adjust the values as needed
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 25),
+            .foregroundColor: UIColor.white // Set the desired text color
+        ]
+        title.draw(in: titleRect, withAttributes: titleAttributes)
     }
     
     func setAndRefreshData(dataPoints: [[CGFloat]]) {
         self.dataPoints = dataPoints
         self.setNeedsDisplay()
+    }
+    
+    func setTitle(_ title: String) {
+        self.title = title
     }
     
     override func layoutSubviews() {

@@ -9,7 +9,7 @@ import UIKit
 
 class RecommendationTableViewCell: UITableViewCell {
     private lazy var label : UILabel = {
-        let label = UILabel(frame: CGRect(x: 10, y: 10, width: self.frame.width - 80, height: 30))
+        let label = UILabel(frame: CGRect(x: 10, y: 10, width: self.frame.width, height: 30))
         label.textColor = .white
         return label
     }()
@@ -26,8 +26,8 @@ class RecommendationTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func setLabelText (_ text: String?) {
+    public func setLabelText (_ text: String?, _ color: UIColor = .white) {
         self.label.text = text
+        self.label.textColor = color
     }
-    
 }

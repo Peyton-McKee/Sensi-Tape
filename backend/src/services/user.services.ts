@@ -35,4 +35,16 @@ export default class UserService {
 
     return user;
   }
+
+  static async createUser(firstName: string, lastName: string, email: string): Promise<User> {
+    const user = await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        email
+      }
+    });
+
+    return user;
+  }
 }

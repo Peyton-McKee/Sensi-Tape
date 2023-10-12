@@ -53,8 +53,6 @@ class ConfigureViewController: UIViewController, ErrorHandler {
         self.footPickerView.delegate = self
         self.footPickerView.dataSource = self
         self.styleSections()
-        self.setDefaults()
-        self.activityGraphView.setAndRefreshData(dataPoints: [[6, 5, 2, 4, 1]])
         self.setBatteryImageFor(value: 56.5)
         self.configureButtons()
         //        self.mockInputs()
@@ -81,6 +79,9 @@ class ConfigureViewController: UIViewController, ErrorHandler {
             result in
             do {
                 Model.shared.setCurrentUser(try result.get())
+                DispatchQueue.main.async {
+                    self.setDefaults()
+                }
             } catch {
                 DispatchQueue.main.async{
                     self.handle(error: error)
@@ -120,6 +121,13 @@ class ConfigureViewController: UIViewController, ErrorHandler {
         }
         self.footPickerView.selectRow(pickerRow, inComponent: 0, animated: false)
         
+        do {
+            let currentUserData = try Model.shared.getCurrentUser().data.filter({ $0.dataTypeName == RequiredDataType.HEART_RATE.rawValue }).map({ CGFloat($0.value) })
+            self.activityGraphView.setAndRefreshData(dataPoints: [currentUserData])
+        } catch {
+            self.handle(error: error)
+        }
+
     }
     
     private func styleSections() {
@@ -173,6 +181,8 @@ extension ConfigureViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         guard let url = URL(string: self.recommendations[indexPath.row].link) else {
             self.handle(error: ConfigurationError.InvalidLink)
             return

@@ -27,6 +27,7 @@ model Data {
   id           String   @id @default(uuid())
   dataTypeName String
   dataType     DataType @relation(fields: [dataTypeName], references: [name])
+  value        Int
   userId       String
   user         User     @relation(fields: [userId], references: [id])
 }

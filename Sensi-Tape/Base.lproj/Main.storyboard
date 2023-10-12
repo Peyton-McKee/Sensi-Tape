@@ -90,7 +90,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="12"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g7x-SZ-eUR">
-                                                <rect key="frame" x="0.0" y="12" width="373" height="318.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="12" width="373" height="318.66666666666669"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="JQT-dd-dwC">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="318.66666666666669"/>
@@ -117,7 +117,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <pickerView contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="jhB-zc-YAJ">
-                                                                        <rect key="frame" x="0.0" y="51" width="168" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="50.666666666666657" width="168" height="50.333333333333343"/>
                                                                     </pickerView>
                                                                 </subviews>
                                                             </stackView>

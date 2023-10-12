@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Data: Codable {
+struct Data: Codable, Hashable {
     var id: String
     var value: Int
     var dataTypeName: String

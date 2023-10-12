@@ -9,6 +9,7 @@ import Foundation
 
 enum ConfigurationError: Error {
     case InvalidLink
+    case tooManySelectedActivityTypes
 }
 
 extension ConfigurationError: LocalizedError {
@@ -16,6 +17,10 @@ extension ConfigurationError: LocalizedError {
         switch self {
         case .InvalidLink:
             return "Wrongly Configured Link, Try a Different Exercise"
+        case .tooManySelectedActivityTypes:
+            return "You've Reached the max number of activity types"
         }
     }
+    
+    
 }

@@ -8,10 +8,9 @@
 import UIKit
 
 class ActivityViewController: UIViewController, ErrorHandler {
+    private var userData: [Data] = []
     
-    var userData: [Data] = []
-    
-    var uniqueKeys: [String] {
+    private var uniqueKeys: [String] {
         var uniqueKeys: [String] = []
         for userData in self.userData {
             if !uniqueKeys.contains(userData.dataTypeName) {
@@ -21,10 +20,21 @@ class ActivityViewController: UIViewController, ErrorHandler {
         return uniqueKeys
     }
     
-    var selectedActivityTypes: [String] = []
-    var selectedActivityTypesSet: Set<String> = Set()
+    private var sectionToData: [Int: [Data]] {
+        var map = [Int: [Data]]()
+        for (index, type) in self.uniqueKeys.enumerated() {
+            map.updateValue(self.userData.filter({$0.dataTypeName == type}), forKey: index)
+        }
+        return map
+    }
     
-    var valuesToGraph : [[CGFloat]] {
+    private var selectedActivityTypes: [String] = []
+    private var selectedActivityTypesSet: Set<String> = Set()
+    
+    private lazy var sectionIsCollapsed: [Bool] = Array(repeating: true, count: self.sectionToData.count)
+
+    
+    private var valuesToGraph : [[CGFloat]] {
         var valuesToGraph : [[CGFloat]] = []
         for selectedActivityType in selectedActivityTypes {
             let assocaitedData = self.userData.filter({ $0.dataTypeName == selectedActivityType }).map({ CGFloat($0.value) })
@@ -80,13 +90,44 @@ class ActivityViewController: UIViewController, ErrorHandler {
         self.graphView.setAndRefreshData(dataPoints: dataPoints)
     }
     
+    private func toggleSection(tableView: UITableView, _ section: Int) {
+        self.sectionIsCollapsed[section] = !self.sectionIsCollapsed[section]
+        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+    }
+    
+    @objc func headerTapped(_ sender: UITapGestureRecognizer) {
+        if let section = sender.view?.tag {
+            self.toggleSection(tableView: self.activityLogTableView, section)
+            self.updateGraphFor(self.sectionToData[section]!.first!.dataTypeName)
+        }
+    }
+    
+    func updateGraphFor(_ selectedDataType: String) {
+        if !self.selectedActivityTypesSet.contains(selectedDataType) {
+            self.selectedActivityTypesSet.insert(selectedDataType)
+            self.selectedActivityTypes.append(selectedDataType)
+        } else {
+            self.selectedActivityTypes.remove(at: selectedActivityTypes.firstIndex(of: selectedDataType)!)
+            self.selectedActivityTypesSet.remove(selectedDataType)
+        }
+        self.graphKeyTableView.reloadData()
+        self.graphView.setAndRefreshData(dataPoints: self.valuesToGraph)
+    }
 }
 
 extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        switch tableView {
+        case self.activityLogTableView:
+            return self.sectionToData.count
+        default:
+            return 1
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case self.activityLogTableView:
-            return self.userData.count
+            return sectionIsCollapsed[section] ? 0 : self.sectionToData[section]!.count
         case self.graphKeyTableView:
             return self.selectedActivityTypes.count
         default:
@@ -98,7 +139,8 @@ extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifier.recommendationTableViewCell.rawValue, for: indexPath) as! RecommendationTableViewCell
         switch tableView {
         case self.activityLogTableView:
-            cell.setLabelText("\(self.userData[indexPath.row].dataTypeName) - \(self.userData[indexPath.row].value)")
+            let data = self.sectionToData[indexPath.section]![indexPath.row]
+            cell.setLabelText(data.value.description)
         case self.graphKeyTableView:
             cell.setLabelText(self.selectedActivityTypes[indexPath.row], StyleManager.shared.getGraphColor(indexPath.row))
         default:
@@ -112,13 +154,21 @@ extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch tableView {
         case activityLogTableView:
-            view.setTitleLabelText("Activity Log")
+            view.setTitleLabelText(self.sectionToData[section]?.first?.dataTypeName)
+            view.setBackgroundColor(.black)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.headerTapped(_:)))
+            view.tag = section
+            view.addGestureRecognizer(tapGesture)
         case graphKeyTableView:
             view.setTitleLabelText("Key")
         default:
             break
         }
         return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -131,15 +181,7 @@ extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             let selectedData = self.userData[indexPath.row].dataTypeName
-            if !self.selectedActivityTypesSet.contains(selectedData) {
-                self.selectedActivityTypesSet.insert(selectedData)
-                self.selectedActivityTypes.append(selectedData)
-            } else {
-                self.selectedActivityTypes.remove(at: selectedActivityTypes.firstIndex(of: selectedData)!)
-                self.selectedActivityTypesSet.remove(selectedData)
-            }
-            self.graphKeyTableView.reloadData()
-            self.graphView.setAndRefreshData(dataPoints: self.valuesToGraph)
+            self.updateGraphFor(selectedData)
         default:
             return
         }
@@ -149,7 +191,7 @@ extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         switch tableView {
         case self.activityLogTableView:
-            return true
+            return false
         case graphKeyTableView:
             return false
         default:

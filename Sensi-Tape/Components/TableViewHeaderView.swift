@@ -25,7 +25,7 @@ class TableViewHeaderView: UIView {
 
         NSLayoutConstraint.activate([
             self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -8),
+            self.titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0)
         ])
     }
     
@@ -35,6 +35,10 @@ class TableViewHeaderView: UIView {
     
     public func setTitleLabelText(_ text: String?) {
         self.titleLabel.text = text
+    }
+    
+    public func setBackgroundColor(_ color: UIColor = .clear) {
+        self.backgroundColor = color
     }
     
 }

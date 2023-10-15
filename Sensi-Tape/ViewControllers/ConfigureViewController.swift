@@ -17,9 +17,11 @@ class ConfigureViewController: UIViewController, ErrorHandler {
     @IBOutlet var compressionSlider: UISlider!
     @IBOutlet var footPickerView: UIPickerView!
     
-    @IBOutlet var activityStackView: UIStackView!
     @IBOutlet var activityGraphView: LineGraphView!
+    
+    @IBOutlet var tapeStatusStackView: UIStackView!
     @IBOutlet var batteryImageView: UIImageView!
+    @IBOutlet var connectionStatusImageView: UIImageView!
     
     @IBOutlet var recommendationTableView: UITableView!
     
@@ -55,6 +57,7 @@ class ConfigureViewController: UIViewController, ErrorHandler {
         self.styleSections()
         self.setBatteryImageFor(value: 56.5)
         self.configureButtons()
+        self.addLogoToNavigationBarItem()
         //        self.mockInputs()
     }
     
@@ -120,6 +123,7 @@ class ConfigureViewController: UIViewController, ErrorHandler {
             return
         }
         self.footPickerView.selectRow(pickerRow, inComponent: 0, animated: false)
+        self.setWifiImageFor(connected: false)
         
         do {
             let currentUserData = try Model.shared.getCurrentUser().data.filter({ $0.dataTypeName == RequiredDataType.HEART_RATE.rawValue }).map({ CGFloat($0.value) })
@@ -131,9 +135,10 @@ class ConfigureViewController: UIViewController, ErrorHandler {
     }
     
     private func styleSections() {
-        StyleManager.shared.styleViews([self.activityStackView, self.configurationStackView, self.recommendationTableView])
+        StyleManager.shared.styleViews([self.batteryImageView, self.connectionStatusImageView, self.configurationStackView, self.recommendationTableView, self.activityGraphView])
         
         StyleManager.shared.styleTableView(self.recommendationTableView)
+
         self.recommendationTableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         
         self.batteryImageView.tintColor = .gray
@@ -166,6 +171,14 @@ class ConfigureViewController: UIViewController, ErrorHandler {
             self.batteryImageView.tintColor = .red
         }
     }
+    
+    private func setWifiImageFor(connected: Bool) {
+        if (connected) {
+            self.connectionStatusImageView.image = .init(systemName: "wifi")
+        } else {
+            self.connectionStatusImageView.image = .init(systemName: "wifi.slash")
+        }
+    }
 }
 
 extension ConfigureViewController: UITableViewDelegate, UITableViewDataSource {
@@ -195,7 +208,6 @@ extension ConfigureViewController: UITableViewDelegate, UITableViewDataSource {
         view.setTitleLabelText("Recommendations")
         return view
     }
-    
 }
 
 extension ConfigureViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -217,5 +229,27 @@ extension ConfigureViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         return NSAttributedString(string: self.pickerOptions[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
+}
+
+extension ConfigureViewController {
+
+    func addLogoToNavigationBarItem() {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = .init(systemName: "sun.min")
+
+        // In order to center the title view image no matter what buttons there are, do not set the
+        // image view as title view, because it doesn't work. If there is only one button, the image
+        // will not be aligned. Instead, a content view is set as title view, then the image view is
+        // added as child of the content view. Finally, using constraints the image view is aligned
+        // inside its parent.
+        let contentView = UIView()
+        self.navigationItem.titleView = contentView
+        self.navigationItem.titleView?.addSubview(imageView)
+        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 }

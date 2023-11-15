@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Model {
     static let shared = Model()
@@ -22,4 +23,7 @@ class Model {
         return currentUser
     }
     
+    public func openLink(_ link: String) -> Void {
+        UIApplication.shared.open(URL(string: link)!)
+    }
 }

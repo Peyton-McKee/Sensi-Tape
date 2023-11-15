@@ -9,7 +9,7 @@ import UIKit
 
 class ConfigureViewController: UIViewController, ErrorHandler {
     private lazy var loadingScreen = LoadingScreen(frame: self.view.frame)
-    private var recommendations : [Exercise] = []
+    private var recommendations : [Recommendation] = []
     private var pickerOptions : [String] = ["Right Foot", "Left Foot"]
     
     @IBOutlet var configurationStackView: UIStackView!
@@ -49,7 +49,7 @@ class ConfigureViewController: UIViewController, ErrorHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getCurrentUser()
-        self.getAllExercises()
+        self.getAllRecommendations()
         self.recommendationTableView.dataSource = self
         self.recommendationTableView.delegate = self
         self.footPickerView.delegate = self
@@ -93,8 +93,8 @@ class ConfigureViewController: UIViewController, ErrorHandler {
         })
     }
     
-    private func getAllExercises() {
-        APIHandler.shared.queryData(route: Route.allExercises(), completion: {
+    private func getAllRecommendations() {
+        APIHandler.shared.queryData(route: Route.allRecommendations(), completion: {
             result in
             do {
                 self.recommendations = try result.get()
@@ -126,7 +126,7 @@ class ConfigureViewController: UIViewController, ErrorHandler {
         self.setWifiImageFor(connected: false)
         
         do {
-            let currentUserData = try Model.shared.getCurrentUser().data.filter({ $0.dataTypeName == RequiredDataType.HEART_RATE.rawValue }).map({ CGFloat($0.value) })
+            let currentUserData = try Model.shared.getCurrentUser().data.filter({ $0.dataTypeName == RequiredDataType.FRONT_ANKLE_TEMP.rawValue }).map({ CGFloat($0.value) })
             self.activityGraphView.setAndRefreshData(dataPoints: [currentUserData])
         } catch {
             self.handle(error: error)

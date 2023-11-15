@@ -32,7 +32,6 @@ class LoginViewController: UIViewController, ErrorHandler {
                 DispatchQueue.main.async {
                     self.pickerView.reloadAllComponents()
                 }
-                print(self.allUsers)
             } catch {
                 DispatchQueue.main.async {
                     self.handle(error: error)

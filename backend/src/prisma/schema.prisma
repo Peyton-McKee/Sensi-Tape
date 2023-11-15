@@ -10,12 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ActivityLevel {
+  SEDENTARY
+  LIGHTLY_ACTIVE
+  MODERATELY_ACTIVE
+  VERY_ACTIVE
+  EXTREMELY_ACTIVE
+}
+
 model User {
   id        String @id @default(uuid())
   firstName String
   lastName  String
   email     String @unique
-  data      Data[]
+
+  // relations
+  data         Data[]
+  activities   Activity[]
+  currentTags  Tag[]
+  userSettings UserSettings?
+}
+
+model UserSettings {
+  id            String        @id @default(uuid())
+  userId        String        @unique
+  user          User          @relation(fields: [userId], references: [id])
+  activityLevel ActivityLevel
+  gender        String
+  age           Int
+  height        Int // in inches
+  weight        Int // in pounds
 }
 
 model DataType {
@@ -32,6 +56,50 @@ model Data {
   user         User     @relation(fields: [userId], references: [id])
 }
 
+enum ActivityType {
+  STRETCHING
+  STRENGTH_TRAINING
+  CARDIO
+  YOGA
+  PILATES
+  TAI_CHI
+  MEDITATION
+  DANCE
+  WALKING
+  RUNNING
+  CYCLING
+  SWIMMING
+  HIKING
+  CLIMBING
+  SKIING
+  SNOWBOARDING
+  SKATING
+  ROWING
+  KAYAKING
+  CANOEING
+  SURFING
+  PADDLEBOARDING
+  MARTIAL_ARTS
+  BOXING
+  GYMNASTICS
+  CALISTHENICS
+  CROSSFIT
+  BARRE
+  OTHER
+}
+
+model Activity {
+  id           String       @id @default(uuid())
+  name         String
+  tags         Tag[]
+  time         Int
+  activityType ActivityType
+  duration     Int
+  feet        Int
+  userId       String
+  user         User         @relation(fields: [userId], references: [id])
+}
+
 enum Tag {
   RELAXATION
   FLEXIBILITY
@@ -44,7 +112,7 @@ enum Tag {
   POSTURE
 }
 
-model Exercise {
+model Recommendation {
   id   String @id @default(uuid())
   name String
   tags Tag[]

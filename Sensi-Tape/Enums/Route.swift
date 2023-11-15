@@ -8,15 +8,29 @@
 import Foundation
 
 enum Route {
+    static let baseURL = "http://localhost:8080"
+
     static func allUsers () -> String {
-        return APIHandler.shared.baseURL + "/users"
+        return Self.baseURL + "/users"
     }
 
     static func userById (userId: String) -> String {
         return Self.allUsers() + "/\(userId)"
     }
     
-    static func allExercises () -> String {
-        return APIHandler.shared.baseURL + "/exercises"
+    static func allRecommendations () -> String {
+        return Self.baseURL + "/recommendations"
+    }
+    
+    static func userRecommendations (userId: String) -> String {
+        return Self.userById(userId: userId) + "/recommendations"
+    }
+    
+    static func activity () -> String {
+        return Self.baseURL + "/activities"
+    }
+    
+    static func activityTypes() -> String {
+        return Self.activity() + "/types"
     }
 }

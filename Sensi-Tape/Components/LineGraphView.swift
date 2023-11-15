@@ -51,7 +51,7 @@ class LineGraphView: UIView {
             .font: UIFont.systemFont(ofSize: 25),
             .foregroundColor: UIColor.white // Set the desired text color
         ]
-        title.draw(in: titleRect, withAttributes: titleAttributes)
+        self.title.draw(in: titleRect, withAttributes: titleAttributes)
     }
     
     func setAndRefreshData(dataPoints: [[CGFloat]]) {

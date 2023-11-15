@@ -1,7 +1,9 @@
 import express from 'express';
 import userRouter from './routes/user.routes';
-import exerciseRouter from './routes/exercies.routes';
+import exerciseRouter from './routes/recommendation.routes';
 import cors from 'cors';
+import recommendationRouter from './routes/recommendation.routes';
+import activityRouter from './routes/activity.routes';
 
 const app = express();
 
@@ -13,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users', userRouter);
-app.use('/exercises', exerciseRouter);
+app.use('/recommendations', recommendationRouter);
+app.use('/activities', activityRouter);
 
 // Error handling middleware
 app.use((err, _req, res, _next) => {

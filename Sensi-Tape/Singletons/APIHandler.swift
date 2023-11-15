@@ -9,7 +9,6 @@ import Foundation
 
 class APIHandler {
     static let shared = APIHandler()
-    let baseURL = "http://localhost:8080"
     
     /**
      * Generic Query Function for Retrieving data from the backend
@@ -30,6 +29,7 @@ class APIHandler {
                 //If the response status code is not 200 decode the response as an error and complete with the constructed error
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     let errorResponse = try decoder.decode(HttpError.self, from: data)
+                    print(errorResponse)
                     let error = NSError(domain: "HTTPError", code: errorResponse.status, userInfo: [NSLocalizedDescriptionKey: errorResponse.message])
                     completion(.failure(error))
                     return

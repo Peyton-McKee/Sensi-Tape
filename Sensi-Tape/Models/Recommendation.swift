@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Exercise : Codable {
+struct Recommendation : Codable {
     var id: String
     var name: String
     var tags: [Tag]

@@ -15,12 +15,15 @@ struct User : Codable {
     var firstName: String
     var lastName: String
     var email: String
+    var currentTags: [String]
     var fullName: String {
         return "\(firstName) \(lastName)"
     }
 }
 
-
+/**
+ * Authenticated User to be used once logged in
+ */
 struct AuthenticatedUser: Codable {
     var id: String
     var firstName: String
@@ -30,4 +33,18 @@ struct AuthenticatedUser: Codable {
         return "\(firstName) \(lastName)"
     }
     var data : [Data]
+    var userSettings: UserSettings?
+    var tags: [Tag]
+}
+
+/**
+ * Miscellaneous settings for a user
+ */
+struct UserSettings: Codable {
+    var id: String
+    var age: Int
+    var gender: String
+    var height: Int
+    var weight: Int
+    var activityLevel: String
 }

@@ -7,4 +7,6 @@ userRouter.get('/', UserController.getAllUsers);
 
 userRouter.get('/:userId', UserController.getSingleUser);
 
+userRouter.get('/:userId/recommendations', UserController.getUserRecommendations);
+
 export default userRouter;

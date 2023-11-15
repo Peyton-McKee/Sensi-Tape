@@ -27,4 +27,8 @@ final class StyleManager {
     public func getGraphColor (_ index: Int) -> UIColor {
         return graphColors[index]
     }
+    
+    public func getSubtitleFont() -> UIFont {
+        return UIFont(descriptor: UIFontDescriptor(name: "Inconsolata", size: 14), size: 14)
+    }
 }

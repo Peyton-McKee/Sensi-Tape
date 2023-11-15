@@ -16,6 +16,7 @@ class LoadingScreen: UIView {
         super.init(frame: frame)
         self.backgroundColor = .black
         self.addSubview(self.activityMonitor)
+        self.activityMonitor.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -24,6 +25,7 @@ class LoadingScreen: UIView {
     
     public func setDoneLoading(value : Bool) {
         DispatchQueue.main.async {
+            self.activityMonitor.stopAnimating()
             self.isHidden = value
         }
     }

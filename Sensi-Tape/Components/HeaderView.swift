@@ -10,16 +10,19 @@ import UIKit
 class HeaderView: UIView {
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .init(named: "images/logo")
+        imageView.image = .init(named: "logo")
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()
 
-    lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.init(systemName: "magnifyingglass"), for: .normal)
-        button.addTarget(self, action: #selector(self.displaySearchScreen), for: .touchUpInside)
-        button.tintColor = .black
-        return button
+    lazy var searchButtonImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .init(systemName: "magnifyingglass")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.displaySearchScreen))
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+        imageView.tintColor = .black
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        return imageView
     }()
     
     lazy var horizontalStackView: UIStackView = {
@@ -27,7 +30,7 @@ class HeaderView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
         stackView.alignment = .fill
-        [self.logoImageView, self.searchButton].forEach({
+        [self.logoImageView, self.searchButtonImageView].forEach({
             stackView.addArrangedSubview($0)
         })
         return stackView

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ActivityController from '../controllers/activity.controller';
 import { body } from 'express-validator';
-import { validateInputs } from '../utils/error.utils';
+import { intMinZero, nonEmptyString, validateInputs } from '../utils/validation.utils';
 
 const activityRouter = Router();
 
@@ -9,11 +9,11 @@ activityRouter.get('/levels', ActivityController.getAllActivityLevels);
 activityRouter.get('/types', ActivityController.getAllActivityTypes);
 activityRouter.post(
   '/:userId/create',
-  body('title').isString().isLength({ min: 1, max: 255 }),
-  body('type').isString(),
-  body('time').isInt({ min: 0 }),
-  body('duration').isInt({ min: 0 }),
-  body('distance').isInt({ min: 0 }),
+  nonEmptyString(body('title')),
+  nonEmptyString(body('type')),
+  intMinZero(body('time')),
+  intMinZero(body('duration')),
+  intMinZero(body('distance')),
   validateInputs,
   ActivityController.createActivity
 );

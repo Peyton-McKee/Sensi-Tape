@@ -1,8 +1,9 @@
-import { Data, Recommendation, User } from '@prisma/client';
+import { ActivityLevel, Data, Recommendation, User } from '@prisma/client';
 import prisma from '../prisma/prisma';
 import { HttpException } from '../utils/error.utils';
 import { PublicUser } from '../public-types/public-user';
-import userTransformer from '../transformers/user.transformer';
+import { userSettingsTransformer, userTransformer } from '../transformers/user.transformer';
+import { PublicUserSettings } from '../public-types/public-user-settings';
 
 export default class UserService {
   /**
@@ -82,5 +83,53 @@ export default class UserService {
       .map((recommendation) => recommendation.recommendation);
 
     return sortedRecommendations;
+  }
+
+  /**
+   * Upserts user settings for the user with the given id
+   * @param userId the user to add settings for
+   * @param height the height of the user
+   * @param weight the weight of the user
+   * @param gender the gender of the user
+   * @param age the age of the user
+   * @param activityLevel the activity level of the user
+   * @returns the created or updated user settings
+   */
+  static async upsertUserSettings(
+    userId: string,
+    height: number,
+    weight: number,
+    gender: string,
+    age: number,
+    activityLevel: ActivityLevel
+  ): Promise<PublicUserSettings> {
+    const user = await this.getSingleUser(userId);
+
+    const userSettings = await prisma.userSettings.upsert({
+      where: {
+        userId: user.id
+      },
+      update: {
+        height,
+        weight,
+        gender,
+        age,
+        activityLevel
+      },
+      create: {
+        user: {
+          connect: {
+            id: user.id
+          }
+        },
+        height,
+        weight,
+        gender,
+        age,
+        activityLevel
+      }
+    });
+
+    return userSettingsTransformer(userSettings);
   }
 }

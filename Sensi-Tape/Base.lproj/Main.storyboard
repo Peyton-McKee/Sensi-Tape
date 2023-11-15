@@ -89,20 +89,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Vy-Kq-XkM">
-                                <rect key="frame" x="8" y="209" width="377" height="480.66666666666674"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9Vy-Kq-XkM">
+                                <rect key="frame" x="8" y="209" width="377" height="505.33333333333326"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="AkH-fW-VtN">
-                                        <rect key="frame" x="0.0" y="0.0" width="377" height="144.66666666666666"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="AkH-fW-VtN">
+                                        <rect key="frame" x="0.0" y="0.0" width="200.33333333333334" height="144.66666666666666"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="HOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4I-Cf-OWa">
-                                                <rect key="frame" x="0.0" y="0.0" width="342" height="144.66666666666666"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4I-Cf-OWa">
+                                                <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="144.66666666666666"/>
                                                 <fontDescription key="fontDescription" name="Koulen-Regular" family="Koulen" pointSize="80"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzk-eP-IH6">
-                                                <rect key="frame" x="342" y="85.666666666666657" width="35" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzk-eP-IH6">
+                                                <rect key="frame" x="151.33333333333334" y="85.666666666666657" width="49" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -112,17 +112,17 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m8d-d5-flv">
                                         <rect key="frame" x="0.0" y="144.66666666666669" width="377" height="300"/>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Hp-o5-gw1">
-                                        <rect key="frame" x="0.0" y="444.66666666666663" width="377" height="36"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3Hp-o5-gw1">
+                                        <rect key="frame" x="0.0" y="444.66666666666663" width="357" height="60.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xs1-OU-NAT">
-                                                <rect key="frame" x="0.0" y="0.0" width="377" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="357" height="21"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eb5-Rr-ydn">
-                                                <rect key="frame" x="0.0" y="21" width="377" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A brief Summary of the status of your foot and how everything is going " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eb5-Rr-ydn">
+                                                <rect key="frame" x="0.0" y="31" width="357" height="29.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -153,6 +153,8 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="Nnl-ZR-syU"/>
                     <connections>
                         <outlet property="headerView" destination="3ft-U7-Wh6" id="3Oz-bt-bCb"/>
+                        <outlet property="introLabel" destination="lzk-eP-IH6" id="oRk-dn-bYd"/>
+                        <outlet property="summaryContentLabel" destination="Eb5-Rr-ydn" id="iEV-Vg-zt1"/>
                         <outlet property="visualizationImageView" destination="m8d-d5-flv" id="H4M-2W-BQk"/>
                     </connections>
                 </viewController>
@@ -278,7 +280,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dN-GF-vpG">
-                                        <rect key="frame" x="0.0" y="181" width="377" height="216"/>
+                                        <rect key="frame" x="0.0" y="180.66666666666669" width="377" height="216"/>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVITY STATS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXC-xx-mdP" userLabel="Activity Stats">
                                         <rect key="frame" x="0.0" y="397.66666666666663" width="377" height="36.333333333333314"/>
@@ -427,7 +429,7 @@
                                                 <rect key="frame" x="0.0" y="1" width="188.66666666666666" height="71"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eus-CV-naR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eus-CV-naR">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="72.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Koulen-Regular" family="Koulen" pointSize="40"/>
                                                 <nil key="textColor"/>
@@ -450,7 +452,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGk-Zr-GqV">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGk-Zr-GqV">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -467,7 +469,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4he-HI-Bnt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4he-HI-Bnt">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -484,7 +486,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jje-Ie-Iw3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jje-Ie-Iw3">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -501,7 +503,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Il-3e-0sf">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Il-3e-0sf">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -518,7 +520,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcG-UC-GIr">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcG-UC-GIr">
                                                 <rect key="frame" x="188.66666666666663" y="0.0" width="188.33333333333337" height="15"/>
                                                 <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -859,6 +861,7 @@
                 <tabBarController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="vyJ-5c-Uvt" customClass="MainTabBarViewController" customModule="Sensi_Tape" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" alpha="0.80000000000000004" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="orz-ns-GfJ">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tabBar>
                     <connections>

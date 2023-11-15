@@ -30,6 +30,7 @@ class DataViewController: UIViewController, ErrorHandler {
     }
     
     private func configreFrontAnkleLineGrpah(data: [Data]) {
+        self.frontAnkleLineGraph.setTitle("Front Ankle Temperature")
         let frontAnkleData = data.filter({
             $0.dataTypeName == RequiredDataType.FRONT_ANKLE_TEMP.rawValue
         })
@@ -37,6 +38,7 @@ class DataViewController: UIViewController, ErrorHandler {
     }
     
     private func configureLeftSideAnkleLineGraph(data: [Data]) {
+        self.leftSideAnkleLineGraph.setTitle("Left Ankle Temperature")
         let leftSideAnkleData = data.filter({
             $0.dataTypeName == RequiredDataType.LEFT_SIDE_ANKLE_TEMP.rawValue
         })
@@ -44,6 +46,7 @@ class DataViewController: UIViewController, ErrorHandler {
     }
     
     private func configureRightSideAnkleLineGraph(data: [Data]) {
+        self.rightSideAnkleLineGraph.setTitle("Right Ankle Temperature")
         let rightSideAnkleData = data.filter({
             $0.dataTypeName == RequiredDataType.RIGHT_SIDE_ANKLE_TEMP.rawValue
         })

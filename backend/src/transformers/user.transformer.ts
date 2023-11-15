@@ -4,7 +4,7 @@ import userQueryArgs from '../query-args/user.query-args';
 import { PublicUserSettings } from '../public-types/public-user-settings';
 import { dataTransformer } from './data.transformer';
 
-const userTransformer = (user: Prisma.UserGetPayload<typeof userQueryArgs>): PublicUser => {
+export const userTransformer = (user: Prisma.UserGetPayload<typeof userQueryArgs>): PublicUser => {
   return {
     id: user.id,
     firstName: user.firstName,
@@ -16,7 +16,7 @@ const userTransformer = (user: Prisma.UserGetPayload<typeof userQueryArgs>): Pub
   };
 };
 
-const userSettingsTransformer = (userSettings: Prisma.UserSettingsGetPayload<{}> | null): PublicUserSettings => {
+export const userSettingsTransformer = (userSettings: Prisma.UserSettingsGetPayload<{}> | null): PublicUserSettings => {
   if (!userSettings) return undefined;
   return {
     id: userSettings.id,
@@ -27,5 +27,3 @@ const userSettingsTransformer = (userSettings: Prisma.UserSettingsGetPayload<{}>
     activityLevel: userSettings.activityLevel
   };
 };
-
-export default userTransformer;

@@ -32,4 +32,15 @@ export default class UserController {
       next(error);
     }
   }
+
+  static async upsertUserSettings(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.params;
+      const { activityLevel, weight, gender, age, height } = req.body;
+      const user = await UserService.upsertUserSettings(userId, height, weight, gender, age, activityLevel);
+      res.status(200).json(user);
+    } catch (error: unknown) {
+      next(error);
+    }
+  }
 }

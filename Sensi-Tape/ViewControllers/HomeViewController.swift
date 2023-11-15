@@ -11,9 +11,15 @@ class HomeViewController: UIViewController, ErrorHandler {
     @IBOutlet var headerView: HeaderView!
     @IBOutlet var visualizationImageView: UIImageView!
     
+    @IBOutlet var introLabel: UILabel!
+    
+    @IBOutlet var summaryContentLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getCurrentUser()
+        self.visualizationImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        self.visualizationImageView.image = .init(named: "sock")
         // Do any additional setup after loading the view.
     }
     
@@ -25,9 +31,11 @@ class HomeViewController: UIViewController, ErrorHandler {
         APIHandler.shared.queryData(route: Route.userById(userId: userId), completion: {
             result in
             do {
-                Model.shared.setCurrentUser(try result.get())
-                print("test")
-
+                let currentUser: AuthenticatedUser = try result.get()
+                Model.shared.setCurrentUser(currentUser)
+                DispatchQueue.main.async {
+                    self.introLabel.text = "Hey \(currentUser.firstName)"
+                }
             } catch {
                 DispatchQueue.main.async{
                     self.handle(error: error)
@@ -35,15 +43,5 @@ class HomeViewController: UIViewController, ErrorHandler {
             }
         })
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

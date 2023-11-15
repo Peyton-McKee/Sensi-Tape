@@ -19,7 +19,7 @@ class CollectionViewContainer : NSObject, UICollectionViewDelegate, UICollection
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.automaticallyAdjustsScrollIndicatorInsets = false
-        
+        self.collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCellIdentifier.recommendationCollectionViewCellIdentifier.rawValue)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return config.options.count
@@ -27,7 +27,7 @@ class CollectionViewContainer : NSObject, UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.recommendationCollectionViewCellIdentifier.rawValue, for: indexPath) as! CollectionViewCell
-        cell.configure(config.options[indexPath.row])
+        cell.configure(self.config.options[indexPath.row])
         return cell
     }
     

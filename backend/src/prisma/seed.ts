@@ -7,6 +7,8 @@ import prisma from './prisma';
 const performSeed = async () => {
   const joeMama = await UserService.createUser('Joe', 'Mama', 'mama.joe@northeastern.edu');
 
+  const settings = await UserService.upsertUserSettings(joeMama.id, 72, 180, 'Male', 21, 'SEDENTARY');
+
   const mark = await UserService.createUser('Mark', 'Fontenot', 'cookie.eater@gmail.com');
 
   const john = await UserService.createUser('John', 'Doe', 'doe.j@gmail.com');
@@ -29,7 +31,6 @@ const performSeed = async () => {
   await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
   await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
 
-
   await DataTypeService.createDataType('RIGHT_SIDE_ANKLE_TEMP');
 
   await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 98, joeMama.id);
@@ -44,7 +45,6 @@ const performSeed = async () => {
   await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 105, joeMama.id);
   await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 106, joeMama.id);
   await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 100, joeMama.id);
-
 
   await DataTypeService.createDataType('LEFT_SIDE_ANKLE_TEMP');
 

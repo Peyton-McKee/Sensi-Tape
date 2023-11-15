@@ -15,20 +15,33 @@ class ProfileViewController: UIViewController, ErrorHandler {
     @IBOutlet var genderLabel: UILabel!
     @IBOutlet var heightLabel: UILabel!
     @IBOutlet var weightLabel: UILabel!
-    @IBOutlet var AgeLabel: UILabel!
-    @IBOutlet var ActivityLevelLabel: UILabel!
+    @IBOutlet var ageLabel: UILabel!
+    @IBOutlet var activityLevelLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         do {
             let currentUser = try Model.shared.getCurrentUser()
-            self.nameLabel.text = currentUser.fullName
+            self.assignValues(currentUser)
         } catch {
             self.handle(error: error)
         }
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    private func assignValues(_ user: AuthenticatedUser) {
+        self.nameLabel.text = user.fullName
+        guard let userSettings = user.userSettings else {
+            return
+        }
+        self.genderLabel.text = userSettings.gender
+        self.heightLabel.text = "\(userSettings.height)\""
+        self.weightLabel.text = "\(userSettings.weight) lbs"
+        self.ageLabel.text = "\(userSettings.age)"
+        self.activityLevelLabel.text = userSettings.activityLevel
     }
     
     @IBAction func logout(sender: UIButton) {

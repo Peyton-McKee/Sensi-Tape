@@ -14,12 +14,34 @@ class CollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         return label
     }()
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .init(systemName: "play.rectangle")
+        imageView.heightAnchor.constraint(equalToConstant: 125).isActive = true
+        imageView.tintColor = .black
+        imageView.layer.cornerRadius = 25
+        imageView.backgroundColor = .gray
+        return imageView
+    }()
 
+    lazy var vstack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.layer.cornerRadius = 10
+
+        [self.imageView, self.titleLabel].forEach({
+            stackView.addArrangedSubview($0)
+        })
+        return stackView
+    }()
+    
     func configure(_ config: CollectionViewCellConfig) {
         self.titleLabel.text = config.title
-        self.titleLabel.frame = self.frame
-        self.titleLabel.backgroundColor = .orange
-        self.backgroundColor = .black
-        self.contentView.addSubview(self.titleLabel)
+        self.contentView.layer.cornerRadius = 15
+        self.contentView.addSubview(self.vstack)
+        self.vstack.frame = self.contentView.frame
     }
 }

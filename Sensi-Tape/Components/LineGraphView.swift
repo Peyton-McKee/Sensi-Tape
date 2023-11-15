@@ -14,10 +14,58 @@ class LineGraphView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        self.layer.cornerRadius = 0
         
         // Calculate the x and y scales
         let xScale = rect.width / CGFloat(self.dataPoints.first?.count ?? 1)
-        let yScale = rect.height / (self.dataPoints.flatMap { $0 }.max() ?? 1 - (self.dataPoints.flatMap { $0 }.min() ?? 1))
+        
+        // Calculate the range of y values
+        let yMax = self.dataPoints.flatMap { $0 }.max() ?? 1
+        let yMin = self.dataPoints.flatMap { $0 }.min() ?? 0
+        let yRange = yMax - yMin
+        
+        // Limit y-axis height to rect - 20
+        let maxYHeight = rect.height - 20
+        let yScale = maxYHeight / yRange
+        
+        // Draw x-axis
+        let xAxisPath = UIBezierPath()
+        xAxisPath.move(to: CGPoint(x: 5, y: rect.height - 5))
+        xAxisPath.addLine(to: CGPoint(x: rect.width - 5, y: rect.height - 5))
+        UIColor.black.setStroke() // Set the x-axis color
+        xAxisPath.stroke()
+        
+        // Draw y-axis
+        let yAxisPath = UIBezierPath()
+        yAxisPath.move(to: CGPoint(x: 5, y: rect.height - 5))
+        yAxisPath.addLine(to: CGPoint(x: 5, y: 5))
+        UIColor.black.setStroke() // Set the y-axis color
+        yAxisPath.stroke()
+        
+        
+        let yDotCount = 3 // You can adjust the number of dots as needed
+        let yDotSpacing = (maxYHeight + 10) / CGFloat(yDotCount - 1)
+        
+        for i in 0..<yDotCount {
+            let yDotY = CGFloat(i) * yDotSpacing + 5
+            let dotPath = UIBezierPath(arcCenter: CGPoint(x: 5, y: yDotY), radius: 2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
+            UIColor.black.setFill()
+            dotPath.fill()
+        }
+        
+        // Draw x-axis with four dots
+        let xDotCount = 4 // You can adjust the number of dots as needed
+        let xDotSpacing = (rect.width - 10) / CGFloat(xDotCount - 1)
+        
+        for i in 0..<xDotCount {
+            let xDotX = 5 + CGFloat(i) * xDotSpacing
+            let dotPath = UIBezierPath(arcCenter: CGPoint(x: xDotX, y: rect.height - 5), radius: 2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
+            UIColor.black.setFill()
+            dotPath.fill()
+        }
+        
+        
+        
         
         // Loop through each array in the 2D dataPointsArray and draw lines
         for (index, dataPoints) in dataPoints.enumerated() {
@@ -32,12 +80,12 @@ class LineGraphView: UIView {
             path.lineWidth = lineWidth
             
             // Start the path at the first data point
-            path.move(to: CGPoint(x: 0, y: rect.height - (dataPoints[0] - dataPoints.compactMap { $0 }.min()!) * yScale))
-            
+            path.move(to: CGPoint(x: 5, y: rect.height - 5 - (dataPoints[0] - dataPoints.compactMap { $0 }.min()!) * yScale))
+
             // Add line segments for the rest of the data points
             for (index, dataPoint) in dataPoints.enumerated() {
-                let x = CGFloat(index) * xScale
-                let y = rect.height - (dataPoint - dataPoints.compactMap { $0 }.min()!) * yScale
+                let x = CGFloat(index) * xScale + 5
+                let y = rect.height - 5 - (dataPoint - dataPoints.compactMap { $0 }.min()!) * yScale
                 path.addLine(to: CGPoint(x: x, y: y))
             }
             
@@ -46,10 +94,10 @@ class LineGraphView: UIView {
         }
         
         // Draw the title in the top left corner
-        let titleRect = CGRect(x: 10, y: 10, width: 100, height: 30) // Adjust the values as needed
+        let titleRect = CGRect(x: 10, y: 0, width: self.frame.width, height: 30) // Adjust the values as needed
         let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.white // Set the desired text color
+            .font: StyleManager.shared.getSubtitleFont(),
+            .foregroundColor: UIColor.black// Set the desired text color
         ]
         self.title.draw(in: titleRect, withAttributes: titleAttributes)
     }

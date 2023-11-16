@@ -33,4 +33,8 @@ enum Route {
     static func activityTypes() -> String {
         return Self.activity() + "/types"
     }
+    
+    static func createActivityType(userId: String) -> String {
+        return Self.activity() + "/\(userId)/create"
+    }
 }

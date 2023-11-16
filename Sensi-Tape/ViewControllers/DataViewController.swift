@@ -18,7 +18,7 @@ class DataViewController: UIViewController, ErrorHandler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.iconImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         do {
             let currentUserData = try Model.shared.getCurrentUser().data
             self.configreFrontAnkleLineGrpah(data: currentUserData)

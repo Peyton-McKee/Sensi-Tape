@@ -24,6 +24,8 @@
 		155F838A2B04C0B40099C3F7 /* CollectionViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155F83892B04C0B40099C3F7 /* CollectionViewConfig.swift */; };
 		155F838C2B04C24F0099C3F7 /* CollectionViewCellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155F838B2B04C24F0099C3F7 /* CollectionViewCellIdentifier.swift */; };
 		155F838E2B04C3CD0099C3F7 /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155F838D2B04C3CD0099C3F7 /* CollectionViewFlowLayout.swift */; };
+		155F83932B05B0A20099C3F7 /* CreateActivityPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155F83922B05B0A20099C3F7 /* CreateActivityPayload.swift */; };
+		155F83952B05B1D30099C3F7 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155F83942B05B1D30099C3F7 /* AlertHandler.swift */; };
 		159CF2E22AD4C7A00086E6E3 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159CF2E12AD4C7A00086E6E3 /* UserError.swift */; };
 		159CF2E62AD4FACB0086E6E3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159CF2E52AD4FACB0086E6E3 /* SettingsViewController.swift */; };
 		159CF2E92AD4FB300086E6E3 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159CF2E82AD4FB300086E6E3 /* UserDefaultKey.swift */; };
@@ -73,6 +75,8 @@
 		155F83892B04C0B40099C3F7 /* CollectionViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfig.swift; sourceTree = "<group>"; };
 		155F838B2B04C24F0099C3F7 /* CollectionViewCellIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellIdentifier.swift; sourceTree = "<group>"; };
 		155F838D2B04C3CD0099C3F7 /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		155F83922B05B0A20099C3F7 /* CreateActivityPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityPayload.swift; sourceTree = "<group>"; };
+		155F83942B05B1D30099C3F7 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		159CF2E12AD4C7A00086E6E3 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		159CF2E52AD4FACB0086E6E3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		159CF2E82AD4FB300086E6E3 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
@@ -126,6 +130,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		155F83912B05B0940099C3F7 /* Payloads */ = {
+			isa = PBXGroup;
+			children = (
+				155F83922B05B0A20099C3F7 /* CreateActivityPayload.swift */,
+			);
+			path = Payloads;
+			sourceTree = "<group>";
+		};
 		159CF2E02AD4C7920086E6E3 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				15CDD1D62AD44DB7009020EF /* ErrorHandler.swift */,
+				155F83942B05B1D30099C3F7 /* AlertHandler.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -242,6 +255,7 @@
 				15CDD1D82AD44FE6009020EF /* ViewControllers */,
 				15CDD1D52AD44DA3009020EF /* Protocols */,
 				159CF2E72AD4FB210086E6E3 /* Enums */,
+				155F83912B05B0940099C3F7 /* Payloads */,
 				15CDD1D02AD393EC009020EF /* Models */,
 				15FF73962ACDC1D900FC7AB5 /* Main.storyboard */,
 				15FF73992ACDC1DA00FC7AB5 /* Assets.xcassets */,
@@ -337,6 +351,7 @@
 				155F83862B04BF320099C3F7 /* Activities.swift in Sources */,
 				159CF2E62AD4FACB0086E6E3 /* SettingsViewController.swift in Sources */,
 				155F838C2B04C24F0099C3F7 /* CollectionViewCellIdentifier.swift in Sources */,
+				155F83932B05B0A20099C3F7 /* CreateActivityPayload.swift in Sources */,
 				159CF2F12AD5F69A0086E6E3 /* HttpError.swift in Sources */,
 				155F837B2B04AC6C0099C3F7 /* MainTabBarViewController.swift in Sources */,
 				155F836A2B0478F00099C3F7 /* DataViewController.swift in Sources */,
@@ -350,6 +365,7 @@
 				155F83722B0479C00099C3F7 /* HeaderView.swift in Sources */,
 				159CF2E92AD4FB300086E6E3 /* UserDefaultKey.swift in Sources */,
 				155F83702B04793B0099C3F7 /* TreatmentViewController.swift in Sources */,
+				155F83952B05B1D30099C3F7 /* AlertHandler.swift in Sources */,
 				15CDD1D22AD393F7009020EF /* User.swift in Sources */,
 				155F83682B0478E60099C3F7 /* HomeViewController.swift in Sources */,
 				15CDD1CE2AD39326009020EF /* APIHandler.swift in Sources */,

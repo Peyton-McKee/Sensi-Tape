@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct PickerViewConfig {
-    var options: [String] = []
-    var function: (String) -> Void
+struct PickerViewConfig<T> {
+    var options: [PickerViewOptionConfig<T>] = []
+    var label: String
+    var function: (T) -> Void
+}
+
+struct PickerViewOptionConfig<T> {
+    var label: String
+    var value: T
 }

@@ -11,6 +11,7 @@ import UIKit
 class Model {
     static let shared = Model()
     private var currentUser: AuthenticatedUser?
+    static let name = "SensiSock"
     
     public func setCurrentUser(_ user: AuthenticatedUser) {
         self.currentUser = user

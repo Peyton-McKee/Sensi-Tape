@@ -14,13 +14,14 @@ class LoginViewController: UIViewController, ErrorHandler {
     lazy var loadingScreen = LoadingScreen(frame: self.view.frame)
     @IBOutlet var pickerView: UIPickerView!
     
+    lazy var pickerViewContainer = PickerViewContainer(PickerViewConfig(label: "Select User", function: self.setUser), self.pickerView)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.loadingScreen)
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
         self.assignAllUsers()
-        
+        self.pickerViewContainer.setOptions(options: [])
+        self.view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
     }
     
@@ -30,7 +31,7 @@ class LoginViewController: UIViewController, ErrorHandler {
                 self.allUsers = try result.get()
                 self.selectedUser = self.allUsers.first
                 DispatchQueue.main.async {
-                    self.pickerView.reloadAllComponents()
+                    self.pickerViewContainer.setOptions(options: self.allUsers.map({PickerViewOptionConfig(label: $0.fullName, value: $0)}))
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -55,6 +56,13 @@ class LoginViewController: UIViewController, ErrorHandler {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainNavigationController)
         
     }
+                                                       
+    func setUser(_ user: User) -> Void {
+        guard allUsers.count > 0 else {
+            return
+        }
+        self.selectedUser = user
+    }
     
     /*
      // MARK: - Navigation
@@ -66,29 +74,4 @@ class LoginViewController: UIViewController, ErrorHandler {
      }
      */
     
-}
-
-extension LoginViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        self.allUsers.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return allUsers[row].fullName
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: self.allUsers[row].fullName, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard allUsers.count > 0 else {
-            return
-        }
-        self.selectedUser = allUsers[row]
-    }
 }

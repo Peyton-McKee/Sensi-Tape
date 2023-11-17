@@ -5,9 +5,9 @@ import UserService from '../services/user.services';
 import prisma from './prisma';
 
 const performSeed = async () => {
-  const joeMama = await UserService.createUser('Joe', 'Mama', 'mama.joe@northeastern.edu');
+  const golden = await UserService.createUser('Stephen', 'Golden', 'golden.s@northeastern.edu');
 
-  const settings = await UserService.upsertUserSettings(joeMama.id, 72, 180, 'Male', 21, 'SEDENTARY');
+  const settings = await UserService.upsertUserSettings(golden.id, 72, 180, 'Male', 21, 'SEDENTARY');
 
   const mark = await UserService.createUser('Mark', 'Fontenot', 'cookie.eater@gmail.com');
 
@@ -17,46 +17,46 @@ const performSeed = async () => {
 
   await DataTypeService.createDataType('FRONT_ANKLE_TEMP');
 
-  await DataService.createData('FRONT_ANKLE_TEMP', 98.8, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 98.8, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 101, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 102, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 103, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('FRONT_ANKLE_TEMP', 100, joeMama.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 98.8, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 98.8, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 101, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 102, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 103, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('FRONT_ANKLE_TEMP', 100, golden.id);
 
   await DataTypeService.createDataType('RIGHT_SIDE_ANKLE_TEMP');
 
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 98, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 98, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 97, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 97, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 104, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 105, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 106, joeMama.id);
-  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 100, joeMama.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 98, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 98, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 99, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 97, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 97, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 104, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 105, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 106, golden.id);
+  await DataService.createData('RIGHT_SIDE_ANKLE_TEMP', 100, golden.id);
 
   await DataTypeService.createDataType('LEFT_SIDE_ANKLE_TEMP');
 
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 98, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 105, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 98, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 100, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, joeMama.id);
-  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 104, joeMama.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 98, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 105, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 98, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 100, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, golden.id);
+  await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 104, golden.id);
 
   await ExerciseService.createRecommendation(
     'Stretch Ankle',

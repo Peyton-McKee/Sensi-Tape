@@ -12,18 +12,27 @@ class DataViewController: UIViewController, ErrorHandler {
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var activityDescriptionLabel: UILabel!
     
+    @IBOutlet var activitySelectorPickerView: UIPickerView!
     @IBOutlet var frontAnkleLineGraph: LineGraphView!
     @IBOutlet var leftSideAnkleLineGraph: LineGraphView!
     @IBOutlet var rightSideAnkleLineGraph: LineGraphView!
+    
+    var selectedActivity: Activity?
+    var currentUser: AuthenticatedUser?
+    
+    var activities: [Activity] = []
+    
+    lazy var activitySelectorViewPickerViewContainer = PickerViewContainer(PickerViewConfig(label: "Select Activity", function: self.setSelectedActivityType), self.activitySelectorPickerView)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.iconImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         do {
-            let currentUserData = try Model.shared.getCurrentUser().data
-            self.configreFrontAnkleLineGrpah(data: currentUserData)
-            self.configureLeftSideAnkleLineGraph(data: currentUserData)
-            self.configureRightSideAnkleLineGraph(data: currentUserData)
+            self.currentUser = try Model.shared.getCurrentUser()
+            self.configreFrontAnkleLineGrpah(data: currentUser!.data)
+            self.configureLeftSideAnkleLineGraph(data: currentUser!.data)
+            self.configureRightSideAnkleLineGraph(data: currentUser!.data)
+            self.activitySelectorViewPickerViewContainer.setOptions(options: currentUser!.activities.map({PickerViewOptionConfig(label: $0.name, value: $0.id)}))
         } catch {
             self.handle(error: error)
         }
@@ -51,5 +60,24 @@ class DataViewController: UIViewController, ErrorHandler {
             $0.dataTypeName == RequiredDataType.RIGHT_SIDE_ANKLE_TEMP.rawValue
         })
         self.rightSideAnkleLineGraph.setAndRefreshData(dataPoints: [rightSideAnkleData.map({CGFloat($0.value)})])
+    }
+
+    private func setSelectedActivityType(_ activityTypeId: String) {
+        self.selectedActivity = self.activities.first(where: { $0.id == activityTypeId })
+        guard let currentUser = self.currentUser else {
+            self.handle(error: UserError.notSignedInError)
+            return
+        }
+        
+        var data: [Data]
+        if (self.selectedActivity != nil) {
+            data = currentUser.data.filter({$0.time <= selectedActivity!.time + selectedActivity!.duration && $0.time >=  selectedActivity!.time})
+        } else {
+            data = currentUser.data.filter({$0.time >= Int(Date(timeIntervalSinceNow: -600000).timeIntervalSince1970)})
+        }
+        
+        self.configreFrontAnkleLineGrpah(data: data)
+        self.configureLeftSideAnkleLineGraph(data: data)
+        self.configureRightSideAnkleLineGraph(data: data)
     }
 }

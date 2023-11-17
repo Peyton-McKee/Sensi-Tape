@@ -8,7 +8,8 @@
 import Foundation
 
 enum Route {
-    static let baseURL = "http://54.209.178.25"
+    static let localHost = "http://localhost:8080"
+    static let baseURL = Self.localHost
 
     static func allUsers () -> String {
         return Self.baseURL + "/users"

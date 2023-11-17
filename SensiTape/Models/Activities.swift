@@ -14,3 +14,13 @@ struct ActivityTypes: Codable {
 struct ActivityLevels: Codable {
     var activityLevels: [String]
 }
+
+struct Activity: Codable {
+    var id: String
+    var name: String
+    var tags: [Tag]
+    var time: Int
+    var duration: Int
+    var distance: Int
+    var activityType: String
+}

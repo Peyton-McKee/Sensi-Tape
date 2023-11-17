@@ -37,6 +37,7 @@ export default class DataService {
     const data = await prisma.data.create({
       data: {
         value,
+        time: new Date().getTime(),
         dataType: {
           connect: {
             name: dataTypeName

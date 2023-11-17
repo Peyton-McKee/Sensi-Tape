@@ -42,6 +42,7 @@ CREATE TABLE "DataType" (
 CREATE TABLE "Data" (
     "id" TEXT NOT NULL,
     "dataTypeName" TEXT NOT NULL,
+    "time" BIGINT NOT NULL,
     "value" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,
 

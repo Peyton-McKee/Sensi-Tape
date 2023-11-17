@@ -51,6 +51,7 @@ model Data {
   id           String   @id @default(uuid())
   dataTypeName String
   dataType     DataType @relation(fields: [dataTypeName], references: [name])
+  time         BigInt
   value        Int
   userId       String
   user         User     @relation(fields: [userId], references: [id])
@@ -95,7 +96,7 @@ model Activity {
   time         Int
   activityType ActivityType
   duration     Int
-  feet        Int
+  feet         Int
   userId       String
   user         User         @relation(fields: [userId], references: [id])
 }

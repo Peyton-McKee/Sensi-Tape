@@ -25,7 +25,7 @@ final class StyleManager {
     }
     
     public func getGraphColor (_ index: Int) -> UIColor {
-        return graphColors[index]
+        return self.graphColors[index]
     }
     
     public func getSubtitleFont() -> UIFont {

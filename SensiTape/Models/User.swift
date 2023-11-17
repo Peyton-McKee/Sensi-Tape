@@ -35,6 +35,7 @@ struct AuthenticatedUser: Codable {
     var data : [Data]
     var userSettings: UserSettings?
     var tags: [Tag]
+    var activities: [Activity]
 }
 
 /**

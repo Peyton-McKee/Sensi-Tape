@@ -34,7 +34,7 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     lazy var secondTimeOptions: [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: self.getTimeLabel($0), value: $0)})
     lazy var timeOptions = self.secondTimeOptions.enumerated().filter({$0.offset % 900 == 0}).map({$0.element})
     
-    let secondDurationOptions : [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: "\($0/3600) hr, \($0%3600/60) mins", value: $0)})
+    let secondDurationOptions : [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: "\($0/3600) hrs, \($0%3600/60) mins", value: $0)})
     
     lazy var durationOptions = self.secondDurationOptions.enumerated().filter({$0.offset % 900 == 0}).map({$0.element})
     
@@ -77,11 +77,15 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     
     private func getTimeLabel(_ secs: Int) -> String {
         let hour = secs/3600
-        let min = secs%3600/60
         let isMidnight = hour == 0
         let isNoon = hour == 12
         let isAfternoon = hour >= 12
-        return "\(isMidnight ? 12 : isAfternoon && !isNoon ? hour - 12 : hour):\(min) \(isAfternoon ? "pm" : "am")"
+        return "\(isMidnight ? 12 : isAfternoon && !isNoon ? hour - 12 : hour):\(self.minPipe(secs)) \(isAfternoon ? "pm" : "am")"
+    }
+    
+    private func minPipe(_ secs: Int) -> String {
+        let min = secs%3600/60
+        return min == 0 ? "00" : "\(min)"
     }
     
     private func queryActivityTypes() {

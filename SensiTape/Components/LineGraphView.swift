@@ -32,14 +32,14 @@ class LineGraphView: UIView {
         let xAxisPath = UIBezierPath()
         xAxisPath.move(to: CGPoint(x: 5, y: rect.height - 5))
         xAxisPath.addLine(to: CGPoint(x: rect.width - 5, y: rect.height - 5))
-        UIColor.black.setStroke() // Set the x-axis color
+        UIColor.label.setStroke() // Set the x-axis color
         xAxisPath.stroke()
         
         // Draw y-axis
         let yAxisPath = UIBezierPath()
         yAxisPath.move(to: CGPoint(x: 5, y: rect.height - 5))
         yAxisPath.addLine(to: CGPoint(x: 5, y: 5))
-        UIColor.black.setStroke() // Set the y-axis color
+        UIColor.label.setStroke() // Set the y-axis color
         yAxisPath.stroke()
         
         
@@ -49,7 +49,7 @@ class LineGraphView: UIView {
         for i in 0..<yDotCount {
             let yDotY = CGFloat(i) * yDotSpacing + 5
             let dotPath = UIBezierPath(arcCenter: CGPoint(x: 5, y: yDotY), radius: 2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
-            UIColor.black.setFill()
+            UIColor.label.setFill()
             dotPath.fill()
         }
         
@@ -60,7 +60,7 @@ class LineGraphView: UIView {
         for i in 0..<xDotCount {
             let xDotX = 5 + CGFloat(i) * xDotSpacing
             let dotPath = UIBezierPath(arcCenter: CGPoint(x: xDotX, y: rect.height - 5), radius: 2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
-            UIColor.black.setFill()
+            UIColor.label.setFill()
             dotPath.fill()
         }
         
@@ -97,7 +97,7 @@ class LineGraphView: UIView {
         let titleRect = CGRect(x: 10, y: 0, width: self.frame.width, height: 30) // Adjust the values as needed
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .font: StyleManager.shared.getSubtitleFont(),
-            .foregroundColor: UIColor.black// Set the desired text color
+            .foregroundColor: UIColor.label// Set the desired text color
         ]
         self.title.draw(in: titleRect, withAttributes: titleAttributes)
     }

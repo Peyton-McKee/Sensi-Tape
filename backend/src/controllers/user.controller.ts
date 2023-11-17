@@ -17,6 +17,7 @@ export default class UserController {
     try {
       const { userId } = req.params;
       const user: PublicUser = await UserService.getSingleUser(userId);
+      console.log(user)
       res.status(200).json(user);
     } catch (error: unknown) {
       next(error);

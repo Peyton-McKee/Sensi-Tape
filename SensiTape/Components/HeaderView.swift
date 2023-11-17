@@ -20,7 +20,7 @@ class HeaderView: UIView {
         imageView.image = .init(systemName: "magnifyingglass")
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.displaySearchScreen))
         imageView.addGestureRecognizer(tapGestureRecognizer)
-        imageView.tintColor = .black
+        imageView.tintColor = .label
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()

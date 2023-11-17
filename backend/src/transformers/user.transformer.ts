@@ -3,6 +3,7 @@ import { PublicUser } from '../public-types/public-user';
 import userQueryArgs from '../query-args/user.query-args';
 import { PublicUserSettings } from '../public-types/public-user-settings';
 import { dataTransformer } from './data.transformer';
+import { activityTransformer } from './activity.transformer';
 
 export const userTransformer = (user: Prisma.UserGetPayload<typeof userQueryArgs>): PublicUser => {
   return {
@@ -11,6 +12,7 @@ export const userTransformer = (user: Prisma.UserGetPayload<typeof userQueryArgs
     lastName: user.lastName,
     email: user.email,
     tags: user.currentTags,
+    activities: user.activities.map(activityTransformer),
     data: user.data.map(dataTransformer),
     userSettings: userSettingsTransformer(user.userSettings)
   };

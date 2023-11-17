@@ -10,5 +10,6 @@ import Foundation
 struct Data: Codable, Hashable {
     var id: String
     var value: Int
+    var time: Int
     var dataTypeName: String
 }

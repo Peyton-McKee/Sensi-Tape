@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController, ErrorHandler {
             return
         }
         self.genderLabel.text = userSettings.gender
-        self.heightLabel.text = "\(userSettings.height)\""
+        self.heightLabel.text = "\(userSettings.height/12)' \(userSettings.height%12)\""
         self.weightLabel.text = "\(userSettings.weight) lbs"
         self.ageLabel.text = "\(userSettings.age)"
         self.activityLevelLabel.text = userSettings.activityLevel
@@ -54,15 +54,5 @@ class ProfileViewController: UIViewController, ErrorHandler {
         // then call the change root view controller function to change to main tab bar
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(logInViewController)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

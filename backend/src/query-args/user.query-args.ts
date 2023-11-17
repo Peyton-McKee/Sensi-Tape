@@ -1,7 +1,8 @@
 const userQueryArgs = {
   include: {
     userSettings: true,
-    data: true
+    data: true,
+    activities: true
   }
 };
 

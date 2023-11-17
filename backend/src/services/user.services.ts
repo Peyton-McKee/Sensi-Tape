@@ -4,6 +4,7 @@ import { HttpException } from '../utils/error.utils';
 import { PublicUser } from '../public-types/public-user';
 import { userSettingsTransformer, userTransformer } from '../transformers/user.transformer';
 import { PublicUserSettings } from '../public-types/public-user-settings';
+import userQueryArgs from '../query-args/user.query-args';
 
 export default class UserService {
   /**
@@ -24,10 +25,7 @@ export default class UserService {
       where: {
         id: userId
       },
-      include: {
-        data: true,
-        userSettings: true
-      }
+      ...userQueryArgs
     });
 
     if (!user) {

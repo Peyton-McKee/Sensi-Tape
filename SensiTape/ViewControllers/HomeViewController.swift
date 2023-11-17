@@ -24,24 +24,10 @@ class HomeViewController: UIViewController, ErrorHandler {
     }
     
     private func getCurrentUser() {
-        guard let userId = UserDefaults.standard.string(forKey: UserDefaultKey.userId.rawValue) else {
-            self.handle(error: UserError.notSignedInError)
-            return
-        }
-        APIHandler.shared.queryData(route: Route.userById(userId: userId), completion: {
-            result in
-            do {
-                let currentUser: AuthenticatedUser = try result.get()
-                Model.shared.setCurrentUser(currentUser)
-                DispatchQueue.main.async {
-                    self.introLabel.text = "Hey \(currentUser.firstName)"
-                }
-            } catch {
-                DispatchQueue.main.async{
-                    self.handle(error: error)
-                }
-            }
-        })
+        Model.shared.requestUserRefresh(self.handle(error: ), self.successFunction)
     }
-
+    
+    private func successFunction(_ user :AuthenticatedUser) {
+        self.introLabel.text = "Hey, \(user.firstName)"
+    }
 }

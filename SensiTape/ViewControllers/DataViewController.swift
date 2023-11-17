@@ -27,12 +27,20 @@ class DataViewController: UIViewController, ErrorHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.iconImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         do {
-            self.currentUser = try Model.shared.getCurrentUser()
-            self.configreFrontAnkleLineGrpah(data: currentUser!.data)
-            self.configureLeftSideAnkleLineGraph(data: currentUser!.data)
-            self.configureRightSideAnkleLineGraph(data: currentUser!.data)
-            self.activitySelectorViewPickerViewContainer.setOptions(options: currentUser!.activities.map({PickerViewOptionConfig(label: $0.name, value: $0.id)}))
+            let currentUser = try Model.shared.getCurrentUser()
+            self.currentUser = currentUser
+            if (self.selectedActivity == nil) {
+                self.configreFrontAnkleLineGrpah(data: currentUser.data)
+                self.configureLeftSideAnkleLineGraph(data: currentUser.data)
+                self.configureRightSideAnkleLineGraph(data: currentUser.data)
+            }
+            self.activities = currentUser.activities
+            self.activitySelectorViewPickerViewContainer.setOptions(options: currentUser.activities.map({PickerViewOptionConfig(label: $0.name, value: $0.id)}))
         } catch {
             self.handle(error: error)
         }
@@ -71,11 +79,11 @@ class DataViewController: UIViewController, ErrorHandler {
         
         var data: [Data]
         if (self.selectedActivity != nil) {
-            data = currentUser.data.filter({$0.time <= selectedActivity!.time + selectedActivity!.duration && $0.time >=  selectedActivity!.time})
+            data = currentUser.data.filter({$0.time/1000 <= selectedActivity!.time + selectedActivity!.duration && $0.time >=  selectedActivity!.time})
         } else {
-            data = currentUser.data.filter({$0.time >= Int(Date(timeIntervalSinceNow: -600000).timeIntervalSince1970)})
+            data = currentUser.data.filter({$0.time/1000 >= Int(Date(timeIntervalSinceNow: -60).timeIntervalSince1970)})
         }
-        
+
         self.configreFrontAnkleLineGrpah(data: data)
         self.configureLeftSideAnkleLineGraph(data: data)
         self.configureRightSideAnkleLineGraph(data: data)

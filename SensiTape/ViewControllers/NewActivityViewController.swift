@@ -18,9 +18,11 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     
     var selectedTitle: String?
     var selectedType: String?
-    var selectedTime: Int?
-    var selectedDuration: Int?
-    var selectedDistance: Int?
+    var selectedTime: Int = 0
+    var selectedDuration: Int = 0
+    var selectedDistance: Int = 2520
+    
+    let timeInterval = 3600 / 2
     
     var currentUser: AuthenticatedUser?
 
@@ -32,11 +34,11 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     
     let numberMilesOptions: [PickerViewOptionConfig] = [PickerViewOptionConfig(label: "< 1", value: 2520), PickerViewOptionConfig(label: "1 - 3", value: 5280 * 2), PickerViewOptionConfig(label: " 3 - 5", value: 5280 * 4), PickerViewOptionConfig(label: "5+", value: 5280 * 5)]
     lazy var secondTimeOptions: [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: self.getTimeLabel($0), value: $0)})
-    lazy var timeOptions = self.secondTimeOptions.enumerated().filter({$0.offset % 900 == 0}).map({$0.element})
+    lazy var timeOptions = self.secondTimeOptions.enumerated().filter({$0.offset % timeInterval == 0}).map({$0.element})
     
     let secondDurationOptions : [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: "\($0/3600) hrs, \($0%3600/60) mins", value: $0)})
     
-    lazy var durationOptions = self.secondDurationOptions.enumerated().filter({$0.offset % 900 == 0}).map({$0.element})
+    lazy var durationOptions = self.secondDurationOptions.enumerated().filter({$0.offset % timeInterval == 0}).map({$0.element})
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,8 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
         } catch {
             self.handle(error: error)
         }
+        self.activityTitleTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
+
         
         // Do any additional setup after loading the view.
     }
@@ -95,6 +99,7 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
                 let types : ActivityTypes = try result.get()
                 DispatchQueue.main.async {
                     self.activityTypePickerViewContainer.setOptions(options: types.activityTypes.map({PickerViewOptionConfig(label: $0, value: $0)}))
+                    self.selectedType = types.activityTypes.first
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -105,18 +110,21 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     }
     
     @IBAction func submitData() {
-        print(self.selectedTitle, self.selectedType, self.selectedTime, self.selectedDuration, self.selectedDistance)
-        guard let title = self.selectedTitle, let type = self.selectedType, let time = self.selectedTime, let duration = self.selectedDuration, let distance = self.selectedDistance else {
+        guard let title = self.selectedTitle, let type = self.selectedType else {
             self.handle(error: ConfigurationError.didNotFillOutAllRequiredFields)
             return
         }
-        APIHandler.shared.mutateData(route: Route.createActivityType(userId: self.currentUser!.id), data: CreateActivityPayload(title: title, type: type, time: time, duration: duration, distance: distance), completion: {
+        
+        let timeSinceMidnight = Int(getMidnightUnixTime()!)
+
+        APIHandler.shared.mutateData(route: Route.createActivityType(userId: self.currentUser!.id), data: CreateActivityPayload(title: title, type: type, time: self.selectedTime + timeSinceMidnight, duration: self.selectedDuration, distance: self.selectedDistance), completion: {
             result in
             do {
                 let successMessage = try result.get()
                 DispatchQueue.main.async {
                     self.alert(successMessage)
                 }
+                Model.shared.requestUserRefresh(self.handle(error:))
             } catch {
                 DispatchQueue.main.async {
                     self.handle(error: error)
@@ -124,11 +132,38 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
             }
         })
     }
+    
+    private func getMidnightUnixTime() -> TimeInterval? {
+        // Get the current date and time
+        let currentDate = Date()
+
+        // Create a Calendar instance
+        let calendar = Calendar.current
+
+        // Get the components of the current date
+        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+
+        // Create a new date using the components for today at midnight
+        if let midnightDate = calendar.date(from: components) {
+
+            // Get the Unix time (epoch time) for the midnightDate
+            let unixTime = midnightDate.timeIntervalSince1970
+
+            return unixTime
+        }
+
+        // Return nil if there's an error
+        return nil
+    }
 }
 
 
 extension NewActivityViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
+        self.selectTitle(textField.text)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
         self.selectTitle(textField.text)
     }
 }

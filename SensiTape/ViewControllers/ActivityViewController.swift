@@ -68,9 +68,9 @@ class ActivityViewController: UIViewController, ErrorHandler {
     }
     
     private func styleSections () {
-        StyleManager.shared.styleViews([self.graphStackView, self.graphKeyTableView, self.activityLogTableView])
-        StyleManager.shared.styleTableView(self.graphKeyTableView)
-        StyleManager.shared.styleTableView(self.activityLogTableView)
+        StyleManager.styleViews([self.graphStackView, self.graphKeyTableView, self.activityLogTableView])
+        StyleManager.styleTableView(self.graphKeyTableView)
+        StyleManager.styleTableView(self.activityLogTableView)
     }
     
     private func assignCurrentUserData() {

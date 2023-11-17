@@ -96,7 +96,7 @@ class LineGraphView: UIView {
         // Draw the title in the top left corner
         let titleRect = CGRect(x: 10, y: 0, width: self.frame.width, height: 30) // Adjust the values as needed
         let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: StyleManager.shared.getSubtitleFont(),
+            .font: StyleManager.getSubtitleFont(),
             .foregroundColor: UIColor.label// Set the desired text color
         ]
         self.title.draw(in: titleRect, withAttributes: titleAttributes)

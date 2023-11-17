@@ -135,9 +135,9 @@ class ConfigureViewController: UIViewController, ErrorHandler {
     }
     
     private func styleSections() {
-        StyleManager.shared.styleViews([self.batteryImageView, self.connectionStatusImageView, self.configurationStackView, self.recommendationTableView, self.activityGraphView])
+        StyleManager.styleViews([self.batteryImageView, self.connectionStatusImageView, self.configurationStackView, self.recommendationTableView, self.activityGraphView])
         
-        StyleManager.shared.styleTableView(self.recommendationTableView)
+        StyleManager.styleTableView(self.recommendationTableView)
 
         self.recommendationTableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         

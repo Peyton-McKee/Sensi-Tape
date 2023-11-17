@@ -36,7 +36,7 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     lazy var secondTimeOptions: [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: self.getTimeLabel($0), value: $0)})
     lazy var timeOptions = self.secondTimeOptions.enumerated().filter({$0.offset % timeInterval == 0}).map({$0.element})
     
-    let secondDurationOptions : [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: "\($0/3600) hrs, \($0%3600/60) mins", value: $0)})
+    let secondDurationOptions : [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: StyleManager.timePipe($0), value: $0)})
     
     lazy var durationOptions = self.secondDurationOptions.enumerated().filter({$0.offset % timeInterval == 0}).map({$0.element})
     

@@ -77,6 +77,8 @@ class DataViewController: UIViewController, ErrorHandler {
             return
         }
         
+        self.activityDescriptionLabel.text = self.selectedActivity?.activityDescription ?? "Your Current Data"
+        
         var data: [Data]
         if (self.selectedActivity != nil) {
             data = currentUser.data.filter({$0.time/1000 <= selectedActivity!.time + selectedActivity!.duration && $0.time >=  selectedActivity!.time})

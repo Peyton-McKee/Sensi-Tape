@@ -23,4 +23,8 @@ struct Activity: Codable {
     var duration: Int
     var distance: Int
     var activityType: String
+    var activityDescription: String {
+        
+        return "You exercised your foot through \(activityType) at \(StyleManager.datePipe(time)) for \(StyleManager.timePipe(duration)) and moved \(distance) feet."
+    }
 }

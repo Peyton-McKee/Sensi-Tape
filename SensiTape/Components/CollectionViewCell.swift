@@ -10,7 +10,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = StyleManager.shared.getSubtitleFont()
+        label.font = StyleManager.getSubtitleFont()
         label.textAlignment = .center
         return label
     }()

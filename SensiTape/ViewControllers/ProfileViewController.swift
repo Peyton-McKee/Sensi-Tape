@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, ErrorHandler {
-    @IBOutlet var HeaderView: HeaderView!
+    @IBOutlet var headerView: HeaderView!
     @IBOutlet var profilePictureImageVIew: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     
@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController, ErrorHandler {
     }
     
     private func assignValues(_ user: AuthenticatedUser) {
+        self.headerView.viewController = self
         self.nameLabel.text = user.fullName
         guard let userSettings = user.userSettings else {
             return

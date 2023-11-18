@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Tag : String, Codable {
+enum Tag : String, Codable, CaseIterable {
     case RELAXATION = "RELAXATION"
     case FLEXIBILITY = "FLEXIBILITY"
     case DISCOMFORT_RESOLUTION = "DISCOMFORT_RESOLUTION"

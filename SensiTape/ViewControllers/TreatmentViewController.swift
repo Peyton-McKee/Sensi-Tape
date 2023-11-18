@@ -8,7 +8,7 @@
 import UIKit
 
 class TreatmentViewController: UIViewController, ErrorHandler{
-    @IBOutlet var HeaderView: HeaderView!
+    @IBOutlet var headerView: HeaderView!
     @IBOutlet var treatmentDescriptionLabel: UILabel!
     @IBOutlet var recommendationVideoCollectionView: UICollectionView!
     
@@ -17,6 +17,7 @@ class TreatmentViewController: UIViewController, ErrorHandler{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.headerView.viewController = self
         self.recommendationVideoCollectionViewContainer.setFlowlayout(CollectionViewFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 10, minimumLineSpacing: 10))
         self.getAllRecommendations()
     }

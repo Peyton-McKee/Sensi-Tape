@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, ErrorHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getCurrentUser()
+        self.headerView.viewController = self
         self.visualizationImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         self.visualizationImageView.image = .init(named: "sock")
         // Do any additional setup after loading the view.

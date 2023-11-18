@@ -42,6 +42,7 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.headerView.viewController = self
         self.timePickerViewContainer.setOptions(options: self.timeOptions)
         self.activityTypePickerViewContainer.setOptions(options: [])
         self.durationPickerViewContainer.setOptions(options: self.durationOptions)
@@ -156,7 +157,6 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
         return nil
     }
 }
-
 
 extension NewActivityViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {

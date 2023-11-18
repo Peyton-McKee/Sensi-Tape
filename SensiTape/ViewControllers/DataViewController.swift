@@ -31,6 +31,7 @@ class DataViewController: UIViewController, ErrorHandler {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.headerView.viewController = self
         do {
             let currentUser = try Model.shared.getCurrentUser()
             self.currentUser = currentUser

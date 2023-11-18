@@ -9,4 +9,5 @@ import Foundation
 
 enum TableViewCellIdentifier: String {
     case recommendationTableViewCell = "RecommendationTableViewCell"
+    case searchTableViewCell = "SearchTableViewCell"
 }

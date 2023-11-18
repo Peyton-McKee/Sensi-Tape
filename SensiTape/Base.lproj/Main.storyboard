@@ -178,19 +178,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="145"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DATA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCo-gZ-UjH">
-                                                <rect key="frame" x="0.0" y="0.0" width="127.66666666666667" height="145"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="170.33333333333334" height="145"/>
                                                 <fontDescription key="fontDescription" name="Koulen-Regular" family="Koulen" pointSize="80"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Adc-ya-6K9">
-                                                <rect key="frame" x="137.66666666666663" y="0.0" width="255.33333333333337" height="145"/>
+                                                <rect key="frame" x="180.33333333333337" y="0.0" width="212.66666666666663" height="145"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ActivityIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Shl-5w-rvX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="255.33333333333334" height="130"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="212.66666666666666" height="130"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Current Data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6V-wg-0sJ">
-                                                        <rect key="frame" x="0.0" y="130" width="255.33333333333334" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Current Data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6V-wg-0sJ">
+                                                        <rect key="frame" x="0.0" y="130" width="212.66666666666666" height="15"/>
                                                         <fontDescription key="fontDescription" name="Inconsolata-Regular" family="Inconsolata" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -199,7 +199,7 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="cCo-gZ-UjH" firstAttribute="width" secondItem="Shl-5w-rvX" secondAttribute="width" multiplier="0.5" id="TNG-pe-rBm"/>
+                                            <constraint firstItem="cCo-gZ-UjH" firstAttribute="width" secondItem="Shl-5w-rvX" secondAttribute="width" multiplier="0.8" id="TNG-pe-rBm"/>
                                         </constraints>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2U-HF-AO6">
@@ -406,7 +406,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Treatment" image="bell" catalog="system" selectedImage="bell" id="GLA-GK-yd4"/>
                     <connections>
-                        <outlet property="HeaderView" destination="TYM-ih-YZs" id="Qrr-ZW-1D9"/>
+                        <outlet property="headerView" destination="TYM-ih-YZs" id="2Zk-JB-Zok"/>
                         <outlet property="recommendationVideoCollectionView" destination="MvO-hr-eIT" id="Oz1-0F-m75"/>
                         <outlet property="treatmentDescriptionLabel" destination="CJf-Rn-OjZ" id="RCv-TU-faf"/>
                     </connections>
@@ -565,8 +565,8 @@
                     <connections>
                         <outlet property="ActivityLevelLabel" destination="kcG-UC-GIr" id="nMt-gi-4ut"/>
                         <outlet property="AgeLabel" destination="7Il-3e-0sf" id="1eM-SK-RuA"/>
-                        <outlet property="HeaderView" destination="eUB-Gp-0W3" id="wtW-3r-AJh"/>
                         <outlet property="genderLabel" destination="AGk-Zr-GqV" id="Rl6-ar-HaZ"/>
+                        <outlet property="headerView" destination="eUB-Gp-0W3" id="JRw-Lv-PWq"/>
                         <outlet property="heightLabel" destination="4he-HI-Bnt" id="ITM-aT-ihJ"/>
                         <outlet property="nameLabel" destination="Eus-CV-naR" id="Ifk-XW-3Ot"/>
                         <outlet property="profilePictureImageVIew" destination="ilH-ib-IxC" id="Q5b-Um-QYB"/>
@@ -720,6 +720,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBJ-fR-88S" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2779.3893129770991" y="731.69014084507046"/>
+        </scene>
+        <!--Search Table View Controller-->
+        <scene sceneID="fzr-3i-yJQ">
+            <objects>
+                <tableViewController id="BHj-h3-Q9K" customClass="SearchTableViewController" customModule="SensiTape" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="T46-vy-TbP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" id="OAJ-JF-lWH" customClass="SearchTableViewCell" customModule="SensiTape" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OAJ-JF-lWH" id="heV-zv-aa7">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BHj-h3-Q9K" id="enz-6H-qBp"/>
+                            <outlet property="delegate" destination="BHj-h3-Q9K" id="zMJ-XO-gmm"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cee-Qx-s0U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3821" y="732"/>
         </scene>
         <!--Settings-->
         <scene sceneID="3xy-4x-SO8">

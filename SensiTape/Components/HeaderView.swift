@@ -21,6 +21,7 @@ class HeaderView: UIView {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.displaySearchScreen))
         imageView.addGestureRecognizer(tapGestureRecognizer)
         imageView.tintColor = .label
+        imageView.isUserInteractionEnabled = true
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         return imageView
     }()
@@ -36,15 +37,23 @@ class HeaderView: UIView {
         return stackView
     }()
     
+    weak var viewController: UIViewController?
+    
     @objc func displaySearchScreen() {
         print("search button pressed")
+        guard let viewController = viewController else {
+            print("uh oh")
+            return
+        }
+        
+        viewController.present(SearchTableViewController(), animated: true)
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.addSubview(self.horizontalStackView)
     }
-    
+
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

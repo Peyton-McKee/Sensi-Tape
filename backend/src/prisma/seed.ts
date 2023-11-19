@@ -1,6 +1,5 @@
 import DataService from '../services/data.services';
 import DataTypeService from '../services/dateType.services';
-import ExerciseService from '../services/recommendation.services';
 import UserService from '../services/user.services';
 import prisma from './prisma';
 
@@ -57,36 +56,6 @@ const performSeed = async () => {
   await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, golden.id);
   await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 97, golden.id);
   await DataService.createData('LEFT_SIDE_ANKLE_TEMP', 104, golden.id);
-
-  await ExerciseService.createRecommendation(
-    'Stretch Ankle',
-    ['FLEXIBILITY', 'MOBILITY', 'STABILITY'],
-    'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  );
-
-  await ExerciseService.createRecommendation(
-    'Compain to the neighbors',
-    ['DISCOMFORT_RESOLUTION', 'PAIN_RELIEF', 'STRENGTH', 'STABILITY'],
-    'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  );
-
-  await ExerciseService.createRecommendation(
-    'Calf Raises',
-    ['STRENGTH', 'STABILITY'],
-    'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  );
-
-  await ExerciseService.createRecommendation(
-    'Toe Raises',
-    ['STRENGTH', 'STABILITY'],
-    'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  );
-
-  await ExerciseService.createRecommendation(
-    'Jumping Jacks',
-    ['STRENGTH', 'STABILITY'],
-    'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  );
 };
 
 performSeed()

@@ -40,7 +40,6 @@ class HeaderView: UIView {
     weak var viewController: UIViewController?
     
     @objc func displaySearchScreen() {
-        print("search button pressed")
         guard let viewController = viewController else {
             print("uh oh")
             return

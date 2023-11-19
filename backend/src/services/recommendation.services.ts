@@ -1,4 +1,3 @@
-import { Recommendation, Tag } from '@prisma/client';
 import prisma from '../prisma/prisma';
 import { PublicRecommendation } from '../public-types/public-recommendation';
 

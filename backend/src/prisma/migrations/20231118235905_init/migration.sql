@@ -4,16 +4,12 @@ CREATE TYPE "ActivityLevel" AS ENUM ('SEDENTARY', 'LIGHTLY_ACTIVE', 'MODERATELY_
 -- CreateEnum
 CREATE TYPE "ActivityType" AS ENUM ('STRETCHING', 'STRENGTH_TRAINING', 'CARDIO', 'YOGA', 'PILATES', 'TAI_CHI', 'MEDITATION', 'DANCE', 'WALKING', 'RUNNING', 'CYCLING', 'SWIMMING', 'HIKING', 'CLIMBING', 'SKIING', 'SNOWBOARDING', 'SKATING', 'ROWING', 'KAYAKING', 'CANOEING', 'SURFING', 'PADDLEBOARDING', 'MARTIAL_ARTS', 'BOXING', 'GYMNASTICS', 'CALISTHENICS', 'CROSSFIT', 'BARRE', 'OTHER');
 
--- CreateEnum
-CREATE TYPE "Tag" AS ENUM ('RELAXATION', 'FLEXIBILITY', 'DISCOMFORT_RESOLUTION', 'STRENGTH', 'PAIN_RELIEF', 'MOBILITY', 'STABILITY', 'BALANCE', 'POSTURE');
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "currentTags" "Tag"[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -39,6 +35,13 @@ CREATE TABLE "DataType" (
 );
 
 -- CreateTable
+CREATE TABLE "Tag" (
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "Tag_pkey" PRIMARY KEY ("name")
+);
+
+-- CreateTable
 CREATE TABLE "Data" (
     "id" TEXT NOT NULL,
     "dataTypeName" TEXT NOT NULL,
@@ -53,7 +56,6 @@ CREATE TABLE "Data" (
 CREATE TABLE "Activity" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "tags" "Tag"[],
     "time" INTEGER NOT NULL,
     "activityType" "ActivityType" NOT NULL,
     "duration" INTEGER NOT NULL,
@@ -67,10 +69,21 @@ CREATE TABLE "Activity" (
 CREATE TABLE "Recommendation" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "tags" "Tag"[],
     "link" TEXT NOT NULL,
 
     CONSTRAINT "Recommendation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "_TagToUser" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_RecommendationToTag" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
 );
 
 -- CreateIndex
@@ -81,6 +94,21 @@ CREATE UNIQUE INDEX "UserSettings_userId_key" ON "UserSettings"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DataType_name_key" ON "DataType"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_TagToUser_AB_unique" ON "_TagToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_TagToUser_B_index" ON "_TagToUser"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_RecommendationToTag_AB_unique" ON "_RecommendationToTag"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_RecommendationToTag_B_index" ON "_RecommendationToTag"("B");
 
 -- AddForeignKey
 ALTER TABLE "UserSettings" ADD CONSTRAINT "UserSettings_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -93,3 +121,15 @@ ALTER TABLE "Data" ADD CONSTRAINT "Data_userId_fkey" FOREIGN KEY ("userId") REFE
 
 -- AddForeignKey
 ALTER TABLE "Activity" ADD CONSTRAINT "Activity_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_TagToUser" ADD CONSTRAINT "_TagToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Tag"("name") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_TagToUser" ADD CONSTRAINT "_TagToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_RecommendationToTag" ADD CONSTRAINT "_RecommendationToTag_A_fkey" FOREIGN KEY ("A") REFERENCES "Recommendation"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_RecommendationToTag" ADD CONSTRAINT "_RecommendationToTag_B_fkey" FOREIGN KEY ("B") REFERENCES "Tag"("name") ON DELETE CASCADE ON UPDATE CASCADE;

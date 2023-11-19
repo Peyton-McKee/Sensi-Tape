@@ -6,7 +6,6 @@ export default class UserController {
   static async getAllUsers(_req: Request, res: Response, next: NextFunction) {
     try {
       const allUsers = await UserService.getAllUsers();
-
       res.status(200).json(allUsers);
     } catch (error) {
       next(error);
@@ -17,7 +16,6 @@ export default class UserController {
     try {
       const { userId } = req.params;
       const user: PublicUser = await UserService.getSingleUser(userId);
-      console.log(user)
       res.status(200).json(user);
     } catch (error: unknown) {
       next(error);

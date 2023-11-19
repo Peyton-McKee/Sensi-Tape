@@ -32,7 +32,7 @@ class NewActivityViewController: UIViewController, ErrorHandler, AlertHandler {
     lazy var durationPickerViewContainer = PickerViewContainer(PickerViewConfig(label: "Duration*", function: self.selectDuration), self.durationPickerView)
     lazy var milesPickerViewContainer = PickerViewContainer(PickerViewConfig(label: "# of Miles*", function: self.selectDistance), self.milesPickerView)
     
-    let numberMilesOptions: [PickerViewOptionConfig] = [PickerViewOptionConfig(label: "< 1", value: 2520), PickerViewOptionConfig(label: "1 - 3", value: 5280 * 2), PickerViewOptionConfig(label: " 3 - 5", value: 5280 * 4), PickerViewOptionConfig(label: "5+", value: 5280 * 5)]
+    let numberMilesOptions: [PickerViewOptionConfig] = [PickerViewOptionConfig(label: "< 1", value: 2520), PickerViewOptionConfig(label: "1 - 3", value: 5280 * 2), PickerViewOptionConfig(label: "3 - 5", value: 5280 * 4), PickerViewOptionConfig(label: "5+", value: 5280 * 5)]
     lazy var secondTimeOptions: [PickerViewOptionConfig] = (0..<3600 * 24).map({PickerViewOptionConfig(label: self.getTimeLabel($0), value: $0)})
     lazy var timeOptions = self.secondTimeOptions.enumerated().filter({$0.offset % timeInterval == 0}).map({$0.element})
     

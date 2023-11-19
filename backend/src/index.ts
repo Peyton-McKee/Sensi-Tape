@@ -4,6 +4,7 @@ import exerciseRouter from './routes/recommendation.routes';
 import cors from 'cors';
 import recommendationRouter from './routes/recommendation.routes';
 import activityRouter from './routes/activity.routes';
+import tagRouter from './routes/tag.routes';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/users', userRouter);
 app.use('/recommendations', recommendationRouter);
 app.use('/activities', activityRouter);
+app.use('/tags', tagRouter);
 
 // Error handling middleware
 app.use((err, _req, res, _next) => {

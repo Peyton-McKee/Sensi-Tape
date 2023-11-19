@@ -18,13 +18,11 @@ struct ActivityLevels: Codable {
 struct Activity: Codable {
     var id: String
     var name: String
-    var tags: [Tag]
     var time: Int
     var duration: Int
     var distance: Int
     var activityType: String
     var activityDescription: String {
-        
         return "You exercised your foot through \(activityType) at \(StyleManager.datePipe(time)) for \(StyleManager.timePipe(duration)) and moved \(distance) feet."
     }
 }

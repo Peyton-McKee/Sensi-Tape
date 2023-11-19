@@ -9,15 +9,16 @@ import UIKit
 
 class SearchTableViewController: UITableViewController, ErrorHandler {
     
-    let tagArr = Tag.allCases.map({$0.rawValue})
-    var tagSet: Set<Tag> = Set(Tag.allCases)
+    var tags: [Tag] = []
+    
     var recommendations: [Recommendation] = []
     
     var filteredData: [Recommendation] {
         guard let selection = self.selection else {
             return recommendations
         }
-        return recommendations.filter({$0.tags.contains(Tag(rawValue: selection.uppercased())!)})
+        
+        return self.recommendations.filter({$0.tags.contains(Tag(name: selection.uppercased()))})
     }
     
     
@@ -39,6 +40,7 @@ class SearchTableViewController: UITableViewController, ErrorHandler {
         super.viewDidLoad()
         self.layoutAutocompleteTextField()
         self.getAllRecommendations()
+        self.getAllTags()
         self.tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: TableViewCellIdentifier.searchTableViewCell.rawValue)
     }
     
@@ -53,7 +55,7 @@ class SearchTableViewController: UITableViewController, ErrorHandler {
         let cellData = filteredData[indexPath.row]
         cell.textLabel?.font = StyleManager.getSubtitleFont()
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = cellData.name + " " + cellData.tags.reduce("", {result, tag in "\(result)(\(tag)), "}).dropLast(2)
+        cell.textLabel?.text = cellData.name + " " + cellData.tags.reduce("", {result, tag in "\(result)(\(tag.name)), "}).dropLast(2)
         return cell
     }
     
@@ -69,6 +71,20 @@ class SearchTableViewController: UITableViewController, ErrorHandler {
                 DispatchQueue.main.async {
                     self.recommendations = recommendations
                     self.tableView.reloadData()
+                }
+            } catch {
+                self.handle(error: error)
+            }
+        })
+    }
+    
+    private func getAllTags() {
+        APIHandler.shared.queryData(route: Route.allTags(), completion: {
+            result in
+            do {
+                let tags: [Tag] = try result.get()
+                DispatchQueue.main.async {
+                    self.tags = tags
                 }
             } catch {
                 self.handle(error: error)
@@ -104,7 +120,7 @@ extension SearchTableViewController: AutoCompleteTextFieldDelegate {
     }
     
     func provideDatasource() {
-        self.autoCompleteTextField.datasource = self.tagArr
+        self.autoCompleteTextField.datasource = self.tags.map({$0.name})
     }
     
 }

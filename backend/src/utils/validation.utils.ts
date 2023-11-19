@@ -1,5 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import { ValidationChain, validationResult } from "express-validator";
+import { Tag } from '@prisma/client';
+import { NextFunction, Request, Response } from 'express';
+import { ValidationChain, validationResult } from 'express-validator';
 
 export const intMinZero = (validationObject: ValidationChain): ValidationChain => {
   return validationObject.isInt({ min: 0 }).not().isString();
@@ -9,7 +10,6 @@ export const intMinZero = (validationObject: ValidationChain): ValidationChain =
 export const nonEmptyString = (validationObject: ValidationChain): ValidationChain => {
   return validationObject.isString().not().isEmpty();
 };
-
 
 export const validateInputs = (req: Request, res: Response, next: NextFunction): Response | void => {
   const errors = validationResult(req);

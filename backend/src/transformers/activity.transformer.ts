@@ -5,7 +5,6 @@ export const activityTransformer = (activity: Activity): PublicActivity => {
   return {
     id: activity.id,
     name: activity.name,
-    tags: activity.tags,
     time: activity.time,
     activityType: activity.activityType,
     duration: activity.duration,

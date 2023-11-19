@@ -19,11 +19,16 @@ class TreatmentViewController: UIViewController, ErrorHandler{
         super.viewDidLoad()
         self.headerView.viewController = self
         self.recommendationVideoCollectionViewContainer.setFlowlayout(CollectionViewFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 10, minimumLineSpacing: 10))
-        self.getAllRecommendations()
+        self.getUserRecommendations()
     }
     
-    private func getAllRecommendations() {
-        APIHandler.shared.queryData(route: Route.allRecommendations(), completion: {
+    private func getUserRecommendations() {
+        guard let userId = UserDefaults.standard.string(forKey: UserDefaultKey.userId.rawValue) else {
+            self.handle(error: UserError.notSignedInError)
+            return
+        }
+        
+        APIHandler.shared.queryData(route: Route.userRecommendations(userId: userId), completion: {
             result in
             do {
                 let recommendations: [Recommendation] = try result.get()

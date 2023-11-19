@@ -65,12 +65,17 @@ export default class UserService {
   static async getUserRecommendations(userId: string): Promise<Recommendation[]> {
     const user = await this.getSingleUser(userId);
 
-    const recommendations = await prisma.recommendation.findMany();
+    const recommendations = await prisma.recommendation.findMany({
+      include: {
+        tags: true
+      }
+    });
 
     //Get the six recommendations with the most tags in common with the user
+    const userTags = user.tags.map((tag) => tag.name);
     const sortedRecommendations = recommendations
       .map((recommendation) => {
-        const commonTags = recommendation.tags.filter((tag) => user.tags.includes(tag));
+        const commonTags = recommendation.tags.filter((tag) => userTags.includes(tag.name));
         return {
           recommendation,
           commonTags

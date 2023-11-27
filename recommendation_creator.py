@@ -32,7 +32,7 @@ def parse_excel_to_data_list(excel_file_path, sheet_name):
 
 # Function to aggregate data
 def publish_data(data_list: list):
-    url = "http://localhost:8080/recommendations/create"
+    url = "http://54.209.178.25/recommendations/create"
 
     for data in data_list:
          payload = {

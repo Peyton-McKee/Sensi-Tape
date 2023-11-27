@@ -84,11 +84,11 @@ extension AutoCompleteTextField: UITextFieldDelegate {
     }
     
     private func findDatasourceMatch(for textField: UITextField) {
-        guard let datasource = self.datasource?.map({$0.lowercased()}) else { return }
-        let currInput = self.currInput.lowercased()
+        guard let datasource = self.datasource else { return }
+        let currInput = self.currInput
         
-        let allOptions = datasource.filter({ $0.hasPrefix(currInput) })
-        let exactMatch = allOptions.filter() { $0 == currInput }
+        let allOptions = datasource.filter({ $0.lowercased().hasPrefix(currInput.lowercased()) })
+        let exactMatch = allOptions.filter() { $0.lowercased() == currInput.lowercased() }
         let fullName = exactMatch.count > 0 ? exactMatch.first! : allOptions.first ?? currInput
         if let range = fullName.range(of: currInput) {
             let nsRange = fullName.nsRange(from: range)

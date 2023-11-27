@@ -17,8 +17,7 @@ class SearchTableViewController: UITableViewController, ErrorHandler {
         guard let selection = self.selection else {
             return recommendations
         }
-        
-        return self.recommendations.filter({$0.tags.contains(Tag(name: selection.uppercased()))})
+        return self.recommendations.filter({$0.tags.map({$0.name}).contains(selection)})
     }
     
     
